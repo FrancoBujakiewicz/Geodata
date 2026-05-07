@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geolocation Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b0c0f;
+      --surface: #13151a;
+      --border: #1f2230;
+      --accent: #00e5a0;
+      --accent2: #0077ff;
+      --text: #e8eaf0;
+      --muted: #5a5f72;
+      --error: #ff4d6a;
+      --warn: #ffb830;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .icon svg { width: 20px; height: 20px; fill: #000; }
+
+    h1 {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h1 span {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+      font-family: var(--mono);
+      margin-top: 2px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #000;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity .15s, transform .1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn:hover { opacity: .88; }
+    .btn:active { transform: scale(.98); }
+    .btn:disabled { opacity: .4; cursor: not-allowed; }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      min-height: 44px;
+    }
+
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: var(--muted);
+    }
+    .dot.ok   { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+    .dot.err  { background: var(--error);  box-shadow: 0 0 6px var(--error); }
+    .dot.busy { background: var(--warn);   animation: pulse 1s infinite; }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50%      { opacity: .3; }
+    }
+
+    .results {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+    }
+    .row:last-child { border-bottom: none; }
+
+    .label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      flex-shrink: 0;
+    }
+
+    .value {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      text-align: right;
+      word-break: break-all;
+    }
+    .value.empty { color: var(--muted); }
+
+    .map-link {
+      display: block;
+      text-align: center;
+      padding: 10px;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      color: var(--accent2);
+      font-family: var(--mono);
+      font-size: 12px;
+      text-decoration: none;
+      transition: border-color .15s, background .15s;
+    }
+    .map-link:hover { border-color: var(--accent2); background: rgba(0,119,255,.06); }
+
+    .note {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .note b { color: var(--warn); font-weight: 400; }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <div class="header">
+    <div class="icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+    </div>
+    <h1>
+      Geolocation Test
+      <span>navigator.geolocation API</span>
+    </h1>
+  </div>
+
+  <div class="status" id="status">
+    <div class="dot" id="dot"></div>
+    <span id="statusText">Waiting for request…</span>
+  </div>
+
+  <button class="btn" id="btn" onclick="getLocation()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm-7.938 3A8.003 8.003 0 0 1 11 4.062V2h2v2.062A8.003 8.003 0 0 1 19.938 11H22v2h-2.062A8.003 8.003 0 0 1 13 19.938V22h-2v-2.062A8.003 8.003 0 0 1 4.062 13H2v-2h2.062z"/></svg>
+    Get My Location
+  </button>
+
+  <div class="results" id="results">
+    <div class="row"><span class="label">Latitude</span>  <span class="value empty" id="lat">—</span></div>
+    <div class="row"><span class="label">Longitude</span> <span class="value empty" id="lon">—</span></div>
+    <div class="row"><span class="label">Accuracy</span>  <span class="value empty" id="acc">—</span></div>
+    <div class="row"><span class="label">Altitude</span>  <span class="value empty" id="alt">—</span></div>
+    <div class="row"><span class="label">Speed</span>     <span class="value empty" id="spd">—</span></div>
+    <div class="row"><span class="label">Timestamp</span> <span class="value empty" id="ts">—</span></div>
+  </div>
+
+  <a class="map-link" id="mapLink" href="#" target="_blank" style="display:none">
+    📍 Open in Google Maps
+  </a>
+
+  <p class="note">
+    <b>⚠ HTTPS required</b> — browsers block geolocation on plain HTTP.<br>
+    iOS: Safari only (Chrome/Firefox use the same WebKit engine).<br>
+    Android: allow location permission when prompted.
+  </p>
+
+</div>
+
+<script>
+  function setStatus(state, text) {
+    const dot = document.getElementById('dot');
+    const statusText = document.getElementById('statusText');
+    dot.className = 'dot ' + state;
+    statusText.textContent = text;
+  }
+
+  function val(id, text, active) {
+    const el = document.getElementById(id);
+    el.textContent = text;
+    el.className = 'value' + (active ? '' : ' empty');
+  }
+
+  function getLocation() {
+    const btn = document.getElementById('btn');
+
+    if (!navigator.geolocation) {
+      setStatus('err', 'Geolocation NOT supported by this browser.');
+      return;
+    }
+
+    btn.disabled = true;
+    setStatus('busy', 'Requesting location…');
+
+    const opts = {
+      enableHighAccuracy: true,
+      timeout: 15000,
+      maximumAge: 0
+    };
+
+    navigator.geolocation.getCurrentPosition(
+      function(pos) {
+        const c = pos.coords;
+        const lat = c.latitude.toFixed(6);
+        const lon = c.longitude.toFixed(6);
+
+        setStatus('ok', 'Location retrieved successfully ✓');
+
+        val('lat', lat + '°', true);
+        val('lon', lon + '°', true);
+        val('acc', c.accuracy.toFixed(1) + ' m', true);
+        val('alt', c.altitude != null ? c.altitude.toFixed(1) + ' m' : 'n/a', c.altitude != null);
+        val('spd', c.speed != null ? c.speed.toFixed(2) + ' m/s' : 'n/a', c.speed != null);
+        val('ts',  new Date(pos.timestamp).toLocaleTimeString(), true);
+
+        const link = document.getElementById('mapLink');
+        link.href = 'https://www.google.com/maps?q=' + lat + ',' + lon;
+        link.style.display = 'block';
+
+        btn.disabled = false;
+        btn.textContent = 'Try Again';
+      },
+      function(err) {
+        const msgs = {
+          1: 'Permission DENIED — allow location in browser/OS settings.',
+          2: 'Position UNAVAILABLE — GPS/network could not determine location.',
+          3: 'TIMEOUT — took too long to get a fix. Try again outdoors.'
+        };
+        setStatus('err', msgs[err.code] || 'Unknown error: ' + err.message);
+        btn.disabled = false;
+      },
+      opts
+    );
+  }
+</script>
+</body>
+</html>
