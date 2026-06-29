@@ -2,18 +2,18 @@
  // Apps Script busca una función llamada 'doGet' para servir páginas. 
  function doGet() { return HtmlService.createHtmlOutputFromFile('index');}
 
- function endpointRegistrar() {
+ function endpointRegistrar(datosCiudadano, gmailRegistrador) {
 
   try {
 
-   const resultado = logicaRegistar(datosCiudadano);
+   const resultado = logicaRegistar(datosCiudadano, gmailRegistrador);
    return { exito: true, datos: resultado };
 
   } catch (error) { return { exito: false, error: error.message }; }
 
  }
 
- function endpointBuscar() {
+ function endpointBuscar(dni) {
 
   try {
 
@@ -24,7 +24,7 @@
 
  }
 
- function endpointEditar() {
+ function endpointEditar(datosCiudadano) {
 
   try {
 
@@ -35,7 +35,7 @@
   
  }
 
- function endpointEliminar() {
+ function endpointEliminar(dni) {
 
   try {
 
