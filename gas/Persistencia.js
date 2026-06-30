@@ -5,37 +5,60 @@ const sheet = SpreadsheetApp.openById(SHEET_ID).getActiveSheet();
 const rangoCiudadano = sheet.getRange(1, 1, 1, 10);
 
 function persistenciaRegistrar(datosCiudadano, gmailRegistrador) {
-
-  lock = LockService.getScriptLock();
+  const lock = LockService.getScriptLock();
 
   try {
+    lock.waitLock(20000);
 
-  lock.waitLock(20000); 
+    sheet.appendRow([
+      datosCiudadano.dni,
+      datosCiudadano.nombres,
+      datosCiudadano.apellido,
+      datosCiudadano.numWhatsapp,
+      datosCiudadano.longitud,
+      datosCiudadano.latitud,
+      datosCiudadano.direccion,
+      datosCiudadano.observacion,
+      false, // estaEliminado
+      gmailRegistrador
+    ]);
 
-  sheet.appendRow([
-    datosCiudadano.dni,
-    datosCiudadano.nombres,
-    datosCiudadano.apellido,
-    datosCiudadano.numWhatsapp,
-    datosCiudadano.longitud,
-    datosCiudadano.latitud,
-    datosCiudadano.direccion,
-    datosCiudadano.observacion,
-    false, // estaEliminado
-    gmailRegistrador
-  ]);
-
+    return datosCiudadano;
   } catch (error) {
+    throw new Error("No se pudo registrar el ciudadano");
+  } finally {
+    lock.releaseLock();
+  }
+}
 
-    throw new Error("No se pudo obtener el bloqueo");
+function persistenciaBuscar(dni) {
+
+  const datos = sheet.getDataRange().getValues();
+ 
+  for (let i = 1; i < datos.length; i++) {
     
-  } finally { lock.releaseLock(); }
-
-  return datosCiudadano;
+    const fila = datos[i];
+ 
+    if (String(fila[0]) === String(dni)) {
+      return {
+        dni: fila[0],
+        nombres: fila[1],
+        apellido: fila[2],
+        numWhatsapp: fila[3],
+        longitud: fila[4],
+        latitud: fila[5],
+        direccion: fila[6],
+        observacion: fila[7],
+        estaEliminado: fila[8],
+        registrador: fila[9]
+      };
+    }
+  }
+ 
+  return null;
 
 }
 
-function persistenciaBuscar(dni) {}
 function persistenciaEditar(datosCiudadano) {}
 function persistenciaEliminar(dni) {}
 

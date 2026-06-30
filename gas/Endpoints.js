@@ -1,47 +1,36 @@
 
- // Apps Script busca una función llamada 'doGet' para servir páginas. 
- function doGet() { return HtmlService.createHtmlOutputFromFile('index');}
+ function doGet() { return HtmlService.createHtmlOutputFromFile('index'); }
 
- function endpointRegistrar(datosCiudadano, gmailRegistrador) {
-
+function endpointRegistrar(datosCiudadano, gmailRegistrador) {
   try {
+    return logicaRegistar(datosCiudadano, gmailRegistrador);
+  } catch (error) {
+    return { exito: false, error: error.message };
+  }
+}
 
-   const resultado = logicaRegistar(datosCiudadano, gmailRegistrador);
-   return { exito: true, datos: resultado };
-
-  } catch (error) { return { exito: false, error: error.message }; }
-
- }
-
- function endpointBuscar(dni) {
-
+function endpointBuscar(dni) {
   try {
+    const resultado = logicaBuscar(dni);
+    return { exito: true, datos: resultado };
+  } catch (error) {
+    return { exito: false, error: error.message };
+  }
+}
 
-   const resultado = logicaBuscar(dni);
-   return { exito: true, datos: resultado };
-
-  } catch (error) { return { exito: false, error: error.message }; }
-
- }
-
- function endpointEditar(datosCiudadano) {
-
+function endpointEditar(datosCiudadano) {
   try {
+    return logicaEditar(datosCiudadano);
+  } catch (error) {
+    return { exito: false, error: error.message };
+  }
+}
 
-   const resultado = logicaEditar(datosCiudadano);
-   return { exito: true, datos: resultado };
-
-  } catch (error) { return { exito: false, error: error.message }; }
-  
- }
-
- function endpointEliminar(dni) {
-
+function endpointEliminar(dni) {
   try {
-
-   const resultado = logicaEliminar(dni);
-   return { exito: true, datos: resultado };
-
-  } catch (error) { return { exito: false, error: error.message }; }
-
- }
+    const resultado = logicaEliminar(dni);
+    return { exito: true, datos: resultado };
+  } catch (error) {
+    return { exito: false, error: error.message };
+  }
+}

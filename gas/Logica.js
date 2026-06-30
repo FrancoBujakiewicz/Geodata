@@ -1,78 +1,66 @@
-
- logicaRegistar(datosCiudadano, gmailRegistrador) {
-
+function logicaRegistar(datosCiudadano, gmailRegistrador) {
   const validacion = validarDatos(datosCiudadano);
-
   if (!validacion.esValido) {
-    throw new Error(validacion.error);
+    return { exito: false, error: validacion.error };
   }
- 
-  if (persistenciaBuscar(datosCiudadano.dni)) {
-    throw new Error(`El ciudadano con DNI: ${dni} ya se encuentra registrado`);
-  }
- 
-  try {
 
+  if (persistenciaBuscar(datosCiudadano.dni)) {
+    throw new Error(`El ciudadano con DNI: ${datosCiudadano.dni} ya se encuentra registrado`);
+  }
+
+  try {
     const resultado = persistenciaRegistrar(datosCiudadano, gmailRegistrador);
-    return resultado;
-    
+    return { exito: true, datos: resultado };
   } catch (error) {
     throw new Error("Lo sentimos, no se pudo registrar.");
   }
+}
 
- }
-
- logicaBuscar(dni) {
-
-  if(!validacionNumerica(dni).esValido) {
+function logicaBuscar(dni) {
+  if (!validacionNumerica(dni).esValido) {
     throw new Error("DNI solo puede contener números");
   }
 
   const ciudadano = persistenciaBuscar(dni);
 
-  if(!ciudadano){
+  if (!ciudadano) {
     throw new Error(`Ciudadano con DNI: ${dni} no encontrado`);
   }
 
   return ciudadano;
+}
 
- }
-
- logicaEditar(datosCiudadano) {
-
+function logicaEditar(datosCiudadano) {
   const validacion = validarDatos(datosCiudadano);
-
   if (!validacion.esValido) {
-    throw new Error(validacion.error);
+    return { exito: false, error: validacion.error };
   }
- 
-  return persistenciaEditar(datosCiudadano);
 
- }
+  const resultado = persistenciaEditar(datosCiudadano);
+  return { exito: true, datos: resultado };
+}
 
- logicaEliminar(dni) {
-
-  if(!validacionNumerica(dni).esValido) {
+function logicaEliminar(dni) {
+  if (!validacionNumerica(dni).esValido) {
     throw new Error("DNI solo puede contener números");
   }
 
   return persistenciaEliminar(dni);
+}
 
- }
+/* ################# Validación de datos #################
+/: Delimitador del regex.
+^ y $: La comparación empieza al inicio del string (^)
+y terminal al final del string ($).
+\s: Representa espacio en blanco.
++: Uno o mas caracteres.
+*/
 
- /* ################# Validación de datos #################  
- /: Delimitador del regex.
- ^ y $: La comparación empieza al inicio del string (^) 
- y terminal al final del string ($).
- \s: Representa espacio en blanco.
- +: Uno o mas caracteres.
- */
+const REGEX_OBSERVACION = /^[A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ\s.,]+$/;
+const REGEX_SOLO_LETRAS = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+$/;
+const REGEX_SOLO_NUMEROS = /^[0-9]+$/;
 
- const REGEX_OBSERVACION = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s.,]+$/;
- const REGEX_SOLO_LETRAS = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+$/;
- const REGEX_SOLO_NUMEROS = /^[0-9]+$/;
-
- function validacionNumerica(numero) {
+function validacionNumerica(numero) {
   if (!numero || String(numero).trim() === '') {
     return { esValido: false };
   }
@@ -80,9 +68,9 @@
     return { esValido: false };
   }
   return { esValido: true };
- }
+}
 
- function validarDatos(datosCiudadano) {
+function validarDatos(datosCiudadano) {
   const errores = {};
 
   if (!datosCiudadano || typeof datosCiudadano !== 'object') {
@@ -111,7 +99,9 @@
     errores.numWhatsapp = 'Numero de Whatsapp solo puede contener números';
   }
 
-  if (!REGEX_OBSERVACION.test(datosCiudadano.observacion)) {
+  if (String(datosCiudadano.observacion).trim() !== ''
+      && !REGEX_OBSERVACION.test(datosCiudadano.observacion)) {
+
     errores.observacion = 'Observación solo puede contener letras, puntos y comas';
   }
 
@@ -119,5 +109,4 @@
     esValido: Object.keys(errores).length === 0,
     error: errores
   };
-  
 }
