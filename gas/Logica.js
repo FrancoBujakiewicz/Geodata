@@ -11,15 +11,14 @@
     throw new Error(`El ciudadano con DNI: ${dni} ya se encuentra registrado`);
   }
  
-  resultado = persistenciaRegistrar(datosCiudadano, gmailRegistrador);
+  try {
 
-  if(!resultado) {
-
-   throw new Error("No se pudo completar el registro");
-
-  } 
-
-  return resultado;
+    const resultado = persistenciaRegistrar(datosCiudadano, gmailRegistrador);
+    return resultado;
+    
+  } catch (error) {
+    throw new Error("Lo sentimos, no se pudo registrar.");
+  }
 
  }
 
@@ -107,7 +106,7 @@
     errores.dni = 'DNI solo puede contener números';
   }
 
-  const validacionNumWhatsapp = validacionNumerica(datosCiudadano.num_whatsapp);
+  const validacionNumWhatsapp = validacionNumerica(datosCiudadano.numWhatsapp);
   if (!validacionNumWhatsapp.esValido) {
     errores.numWhatsapp = 'Numero de Whatsapp solo puede contener números';
   }
@@ -120,4 +119,5 @@
     esValido: Object.keys(errores).length === 0,
     error: errores
   };
+  
 }
