@@ -65,6 +65,16 @@
  const REGEX_SOLO_LETRAS = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+$/;
  const REGEX_SOLO_NUMEROS = /^[0-9]+$/;
 
+ function validacionNumerica(numero) {
+  if (!numero || String(numero).trim() === '') {
+    return { esValido: false };
+  }
+  if (!REGEX_SOLO_NUMEROS.test(numero)) {
+    return { esValido: false };
+  }
+  return { esValido: true };
+ }
+
  function validarDatos(datosCiudadano) {
   const errores = {};
 
