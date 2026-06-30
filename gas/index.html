@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+
+    <button onclick="sendValue()">Insert into Sheet</button>
+    <p id="status"></p>
+
+    <script>
+      const obj = {
+
+      dni: 49012343,
+      nombres: "Juan",
+      apellido: "Miguel",
+      numWhatsapp: "3743538920",
+      longitud: -20,
+      latitud: -50,
+      direccion: "Silva 100",
+      observacion: "",
+      estaEliminado: false, // estaEliminado
+
+      };
+      function sendValue() {
+  google.script.run
+    .withSuccessHandler(respuesta => {
+      console.log('Respuesta:', respuesta);
+      document.getElementById('status').innerText = JSON.stringify(respuesta);
+    })
+    .withFailureHandler(error => {
+      console.error('Error:', error.message);
+      document.getElementById('status').innerText = 'Error: ' + error.message;
+    })
+    .endpointRegistrar(obj, "@prueba.com");
+}
+    </script>
+
+  </body>
+</html>
