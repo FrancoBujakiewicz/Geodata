@@ -11,7 +11,15 @@
     throw new Error(`El ciudadano con DNI: ${dni} ya se encuentra registrado`);
   }
  
-  return persistenciaRegistrar(datosCiudadano, gmailRegistrador);
+  resultado = persistenciaRegistrar(datosCiudadano, gmailRegistrador);
+
+  if(!resultado) {
+
+   throw new Error("No se pudo completar el registro");
+
+  } 
+
+  return resultado;
 
  }
 
