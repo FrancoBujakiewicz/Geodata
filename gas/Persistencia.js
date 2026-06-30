@@ -2,7 +2,8 @@
 const SHEET_ID = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
 const sheet = SpreadsheetApp.openById(SHEET_ID).getActiveSheet();
 
-const rangoCiudadano = sheet.getRange(1, 1, 1, 10);
+const numeroDeCampos = 10;
+const rangoCiudadano = sheet.getRange(1, 1, 1, numeroDeCampos);
 
 function persistenciaRegistrar(datosCiudadano, gmailRegistrador) {
   const lock = LockService.getScriptLock();
@@ -36,7 +37,7 @@ function persistenciaBuscar(dni) {
   const datos = sheet.getDataRange().getValues();
  
   for (let i = 1; i < datos.length; i++) {
-    
+
     const fila = datos[i];
  
     if (String(fila[0]) === String(dni)) {
@@ -50,7 +51,8 @@ function persistenciaBuscar(dni) {
         direccion: fila[6],
         observacion: fila[7],
         estaEliminado: fila[8],
-        registrador: fila[9]
+        registrador: fila[9],
+        _fila: i + 1
       };
     }
   }
@@ -59,7 +61,45 @@ function persistenciaBuscar(dni) {
 
 }
 
-function persistenciaEditar(datosCiudadano) {}
+function persistenciaEditar(datosCiudadano) {
+
+  const ciudadanoExistente = persistenciaBuscar(datosCiudadano.dni);
+ 
+  if (!ciudadanoExistente) {
+    throw new Error(`Ciudadano con DNI: ${datosCiudadano.dni} no encontrado`);
+  }
+ 
+  const fila = ciudadanoExistente._fila;
+  const ciudadanoActualizado = Object.assign({}, ciudadanoExistente, datosCiudadano);
+  delete ciudadanoActualizado._fila;
+ 
+  const lock = LockService.getScriptLock();
+ 
+  try {
+    lock.waitLock(20000);
+ 
+    sheet.getRange(fila, 1, 1, 10).setValues([[
+      ciudadanoActualizado.dni,
+      ciudadanoActualizado.nombres,
+      ciudadanoActualizado.apellido,
+      ciudadanoActualizado.numWhatsapp,
+      ciudadanoActualizado.longitud,
+      ciudadanoActualizado.latitud,
+      ciudadanoActualizado.direccion,
+      ciudadanoActualizado.observacion,
+      ciudadanoActualizado.estaEliminado,
+      ciudadanoActualizado.registrador
+    ]]);
+ 
+    return ciudadanoActualizado;
+  } catch (error) {
+    throw new Error("No se pudo editar el ciudadano");
+  } finally {
+    lock.releaseLock();
+  }
+
+}
+
 function persistenciaEliminar(dni) {}
 
 function inicializarSheet() {
