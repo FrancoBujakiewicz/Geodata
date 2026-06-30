@@ -100,7 +100,32 @@ function persistenciaEditar(datosCiudadano) {
 
 }
 
-function persistenciaEliminar(dni) {}
+function persistenciaEliminar(dni) {
+
+  const ciudadanoExistente = persistenciaBuscar(dni);
+ 
+  if (!ciudadanoExistente) {
+    throw new Error(`Ciudadano con DNI: ${dni} no encontrado`);
+  }
+ 
+  const fila = ciudadanoExistente._fila;
+  delete ciudadanoExistente._fila;
+
+  const lock = LockService.getScriptLock();
+ 
+  try {
+    lock.waitLock(20000);
+ 
+    sheet.getRange(fila, 9).setValue(true);
+ 
+    return ciudadanoExistente;
+  } catch (error) {
+    throw new Error("No se pudo eliminar el ciudadano");
+  } finally {
+    lock.releaseLock();
+  }
+
+}
 
 function inicializarSheet() {
 
