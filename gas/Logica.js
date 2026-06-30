@@ -61,52 +61,45 @@
  +: Uno o mas caracteres.
  */
 
+ const REGEX_OBSERVACION = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s.,]+$/;
  const REGEX_SOLO_LETRAS = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+$/;
  const REGEX_SOLO_NUMEROS = /^[0-9]+$/;
 
- function validacionNumerica(numero) {
-  if (!numero || String(numero).trim() === '') {
-    return { esValido: false };
-  }
-  if (!REGEX_SOLO_NUMEROS.test(dni)) {
-    return { esValido: false };
-  }
-  return { esValido: true };
- }
-
  function validarDatos(datosCiudadano) {
+  const errores = {};
 
-  const errores = [];
- 
   if (!datosCiudadano || typeof datosCiudadano !== 'object') {
-    return { esValido: false, error: 'No se recibieron datos del ciudadano' };
+    return { esValido: false, error: { general: 'No se recibieron datos del ciudadano' } };
   }
- 
+
   if (!datosCiudadano.nombres || String(datosCiudadano.nombres).trim() === '') {
-    errores.push('Nombres requeridos');
+    errores.nombres = 'Nombres requeridos';
   } else if (!REGEX_SOLO_LETRAS.test(datosCiudadano.nombres)) {
-    errores.push('Nombres solo puede contener letras');
+    errores.nombres = 'Nombres solo puede contener letras';
   }
- 
+
   if (!datosCiudadano.apellido || String(datosCiudadano.apellido).trim() === '') {
-    errores.push('Apellido requerido');
+    errores.apellido = 'Apellido requerido';
   } else if (!REGEX_SOLO_LETRAS.test(datosCiudadano.apellido)) {
-    errores.push('Apellido solo puede contener letras');
+    errores.apellido = 'Apellido solo puede contener letras';
   }
- 
+
   const validacionDni = validacionNumerica(datosCiudadano.dni);
   if (!validacionDni.esValido) {
-    errores.push('DNI solo puede contener números');
+    errores.dni = 'DNI solo puede contener números';
   }
- 
+
   const validacionNumWhatsapp = validacionNumerica(datosCiudadano.num_whatsapp);
   if (!validacionNumWhatsapp.esValido) {
-    errores.push('Numero de Whatsapp solo puede contener números');
+    errores.numWhatsapp = 'Numero de Whatsapp solo puede contener números';
+  }
+
+  if (!REGEX_OBSERVACION.test(datosCiudadano.observacion)) {
+    errores.observacion = 'Observación solo puede contener letras, puntos y comas';
   }
 
   return {
-    esValido: errores.length === 0,
-    error: errores.join(', ')
+    esValido: Object.keys(errores).length === 0,
+    error: errores
   };
-
 }
