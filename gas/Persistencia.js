@@ -61,14 +61,18 @@ function persistenciaBuscar(dni) {
 
 }
 
-function persistenciaEditar(datosCiudadano) {
+function persistenciaEditar(datosCiudadano, dni) {
 
-  const ciudadanoExistente = persistenciaBuscar(datosCiudadano.dni);
+  const ciudadanoExistente = persistenciaBuscar(dni);
  
   if (!ciudadanoExistente) {
-    throw new Error(`Ciudadano con DNI: ${datosCiudadano.dni} no encontrado`);
+    throw new Error(`Ciudadano con DNI: ${dni} no encontrado`);
   }
  
+ if (ciudadanoExistente.estaEliminado) {
+    throw new Error(`No se puede editar un ciudadano que esta eliminado`);
+  }
+
   const fila = ciudadanoExistente._fila;
   const ciudadanoActualizado = Object.assign({}, ciudadanoExistente, datosCiudadano);
   delete ciudadanoActualizado._fila;
@@ -117,6 +121,7 @@ function persistenciaEliminar(dni) {
     lock.waitLock(20000);
  
     sheet.getRange(fila, 9).setValue(true);
+    ciudadanoExistente.estaEliminado = true;
  
     return ciudadanoExistente;
   } catch (error) {

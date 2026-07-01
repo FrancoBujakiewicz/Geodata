@@ -95,7 +95,8 @@ function validarDatos(datosCiudadano) {
   }
 
   const validacionNumWhatsapp = validacionNumerica(datosCiudadano.numWhatsapp);
-  if (!validacionNumWhatsapp.esValido) {
+  if (String(datosCiudadano.numWhatsapp).trim() !== ''
+      && !validacionNumWhatsapp.esValido) {
     errores.numWhatsapp = 'Numero de Whatsapp solo puede contener números';
   }
 
