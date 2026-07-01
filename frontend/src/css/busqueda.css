@@ -1,0 +1,12 @@
+#busqueda { width: 100%; }
+
+#busqueda p { font-size: 20px; }
+
+#busquedaContenedor {
+
+ display: flex;
+ align-items: left;
+ gap: 30px;
+
+}
+
