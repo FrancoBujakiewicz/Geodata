@@ -2,7 +2,7 @@
 
 #busqueda p { font-size: 20px; }
 
-#busquedaContenedor {
+#contenedorBusqueda {
 
  display: flex;
  align-items: left;

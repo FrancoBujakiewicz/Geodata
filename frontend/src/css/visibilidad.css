@@ -1,0 +1,22 @@
+.visible {
+
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, 0);
+    transition: opacity 1s ease, transform 1s ease, visibility 0s 0s;
+
+ }
+
+ .invisible {
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(0, 20px);
+    transition: opacity 1s ease, transform 1s ease, visibility 0s 1s;
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+
+ }

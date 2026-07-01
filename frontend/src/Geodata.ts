@@ -1,7 +1,14 @@
+
+import './css/style.css';
+import './css/busqueda.css';
+import './css/campos.css';
+import './css/botones.css';
+import './css/contenedorPrincipal.css';
+import './css/visibilidad.css';
+
 import * as DOM from "./ts/DOM.ts";
+import * as Acciones from "./ts/Acciones.ts";
 
- window.addEventListener("DOMContentLoaded", async () => {
+ window.addEventListener("DOMContentLoaded", async () => { DOM.init(); });
 
-    DOM.init();
-
- });
+(window as any).Acciones = Acciones;
