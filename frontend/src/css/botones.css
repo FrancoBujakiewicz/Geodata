@@ -11,15 +11,15 @@ button {
   border-radius: 10px;
   padding: 7.5px;
   transition: transform 0.6s;
+  box-shadow: 0px 4px 4px #00000040;
 
 }
 
 button:hover { transform: scale(1.05); }
 button:active { transform: scale(1.33); }
 
-#botonBuscar, #botonNuevoRegistro, #datosCiudadanoVolver {
+#botonBuscar, #botonNuevoRegistro, #datosCiudadanoVolver, #edicionVolver {
 
-  box-shadow: 0px 4px 4px #00000040;
   background: linear-gradient(
     180deg,
     rgba(65, 163, 255, 1) 0%,
@@ -33,7 +33,7 @@ button:active { transform: scale(1.33); }
 
 #botonNuevoRegistro { padding: 7.5px; }
 
-#contenedorBotones {
+#contenedorBotones, #botonesMapa {
 
  display: flex;
  flex-direction: column;
@@ -41,7 +41,7 @@ button:active { transform: scale(1.33); }
 
 }
 
-#contenedorBotones button {
+#contenedorBotones button, #botonCapturarUbicacion, #seccionEnvio button, #botonEditar {
 
 width: 215px;
 background: linear-gradient(
@@ -51,3 +51,35 @@ background: linear-gradient(
   );
 
 }
+
+#ubicacionCorrecta {
+
+  background: linear-gradient(
+    180deg,
+    #3FC733 0%,
+    #00B200 100%
+  );
+
+}
+
+#ubicacionIncorrecta, #botonEliminar {
+
+  background: linear-gradient(
+    180deg,
+    #C73333 0%,
+    #B20000 100%
+  );
+
+}
+
+#botonEliminar { width: 350px; }
+#edicionVolver, #botonEditar { width: 170px; }
+
+#botonesEdicion, #botonesEdicion center { 
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+
+}
+#botonesEdicion center { flex-direction: row; }

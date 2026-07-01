@@ -11,10 +11,17 @@
 
 #datosCiudadano p { font-size: 20px; }
 
-#datosCiudadano { 
+#datosCiudadano, #seccionEnvio { 
 
   display: flex;
-  flex-direction: column;  
+  flex-direction: column; 
   gap: 15px; 
+
+}
+
+#seccionEnvio { 
+
+  padding-top: 20px;
+  align-items: center; 
 
 }

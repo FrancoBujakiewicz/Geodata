@@ -33,9 +33,20 @@
         <button id="botonInstalar">Instalar Geodata</button>
      </div>
 
-     <div id="datosCiudadano" class="invisible">
-     <button id="datosCiudadanoVolver" onclick="Acciones.navegacionToggle()">Volver</button>
+     <div id="botonVolver" class="invisible"> 
+      <button id="datosCiudadanoVolver" onclick="Acciones.navegacionToggle()">Volver</button>
+     </div>
 
+     <div id="botonesEdicion" class="invisible">
+      <center>
+      <button id="edicionVolver">Volver</button>
+      <button id="botonEditar">Editar</button>
+      </center>
+      <button id="botonEliminar">Eliminar</button> 
+     </div> 
+
+     <div id="datosCiudadano" class="invisible">
+     
     <div>
      <p>DNI</p>  
     <input type="text" placeholder="Ingresar número de DNI" class="campo"></input>
@@ -64,6 +75,26 @@
     <div>
      <p>Observación</p>  
     <input type="text" placeholder="Ingresar observación (Opcional)" class="campo"></input>
+    </div>
+
+    <div>
+      <p>Ubicación</p>
+      <div id="mapa">
+      <center><p>¿La ubicación es correcta?</p></center>
+      </div>
+    </div>
+
+    <div id="botonesMapa">
+
+     <center><button id="botonCapturarUbicacion">Capturar ubicación</button></center>
+
+     <button id="ubicacionCorrecta" class="invisible">Confirmar ubicación</button>
+     <button id="ubicacionIncorrecta" class="invisible">Intentar de nuevo</button>
+    </div>
+    
+    <div id="seccionEnvio">
+      <button>Enviar</button>
+      <p>placeholder</p>
     </div>
 
     </div>
