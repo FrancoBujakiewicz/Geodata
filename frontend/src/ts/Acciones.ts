@@ -29,6 +29,9 @@
    toggle(DOM.botonVolver);
    toggle(DOM.datosCiudadano);
 
+   DOM.botonEnviar.innerText = 'Enviar';
+   DOM.botonEnviar.onclick = registrarCiudadano;
+
  }
 
  export function navegacionEdicion() {
@@ -39,6 +42,8 @@
    toggle(DOM.mensajes);
    toggle(DOM.botonesEdicion);
    toggle(DOM.datosCiudadano);
+
+   DOM.botonEnviar.innerText = 'Confirmar edición';
 
  }
 

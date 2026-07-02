@@ -72,14 +72,13 @@ background: linear-gradient(
 
 }
 
-#botonEliminar { width: 350px; }
-#edicionVolver, #botonEditar { width: 170px; }
+#botonEliminar, #edicionVolver { width: 350px; }
 
 #botonesEdicion, #botonesEdicion center { 
 
   display: flex;
   flex-direction: column;
-  gap: 10px; 
+  gap: 30px; 
 
 }
 #botonesEdicion center { flex-direction: row; }

@@ -11,7 +11,7 @@
   border-color: #ff4040;
 }
 
-#datosCiudadano input { width: 300px; font-size: 16px; } 
+#datosCiudadano input, textarea { width: 300px; font-size: 16px; } 
 
 #datosCiudadano p { font-size: 20px; }
 
