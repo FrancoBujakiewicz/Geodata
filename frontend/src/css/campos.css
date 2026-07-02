@@ -7,6 +7,10 @@
 
 }
 
+.campo.error {
+  border-color: #ff4040;
+}
+
 #datosCiudadano input { width: 300px; font-size: 16px; } 
 
 #datosCiudadano p { font-size: 20px; }

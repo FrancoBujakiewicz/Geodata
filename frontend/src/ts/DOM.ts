@@ -13,12 +13,19 @@
  let ubicacionIncorrecta: HTMLElement;
  let textoUbicacion: HTMLElement;
 
+ let mensajeFormulario: HTMLElement;
+ let botonEnviar: HTMLElement;
+
  let dni: HTMLInputElement;
  let apellido: HTMLInputElement;
  let nombres: HTMLInputElement;
  let numWhatsapp: HTMLInputElement;
  let direccion: HTMLInputElement;
  let observacion: HTMLInputElement;
+
+ let ubicacionConfirmada: boolean;
+ export function setUbicacionConfirmada(value: boolean) { ubicacionConfirmada = value; }
+ export function getUbicacionConfirmada() { return ubicacionConfirmada; }
 
  export {
 
@@ -34,12 +41,14 @@
   ubicacionCorrecta,
   ubicacionIncorrecta,
   textoUbicacion,
+  mensajeFormulario,
+  botonEnviar,
   dni,
   apellido,
   nombres,
   numWhatsapp,
   direccion,
-  observacion
+  observacion,
 
  }
 
@@ -58,6 +67,8 @@
     ubicacionCorrecta = document.getElementById('ubicacionCorrecta')!;
     ubicacionIncorrecta = document.getElementById('ubicacionIncorrecta')!;
     textoUbicacion = document.getElementById('textoUbicacion')!;
+    mensajeFormulario = document.getElementById('mensajeFormulario')!;
+    botonEnviar = document.querySelector('#seccionEnvio button')!;
 
     dni = (document.getElementById('dni')!.querySelector('input') as HTMLInputElement);
     apellido = (document.getElementById('apellido')!.querySelector('input') as HTMLInputElement);
@@ -66,6 +77,19 @@
     direccion = (document.getElementById('direccion')!.querySelector('input') as HTMLInputElement);
     observacion = (document.getElementById('observacion')!.querySelector('input') as HTMLInputElement);
 
+    ubicacionConfirmada = false;
+
+    limpiarErrores();
+
+ }
+
+ const placeholders: Record<string, string> = {
+  dni: 'Ingresar número de DNI',
+  apellido: 'Ingresar apellido',
+  nombres: 'Ingresar nombres',
+  numWhatsapp: 'Ingresar número de Whatsapp',
+  direccion: 'Ingresar dirección',
+  observacion: 'Ingresar observación (Opcional)'
  }
 
  export function obtenerDatosCiudadano(longitud: number, latitud: number): Record<string, any> {
@@ -79,6 +103,35 @@
    latitud: latitud,
    direccion: direccion.value,
    observacion: observacion.value
+  }
+
+ }
+
+ export function limpiarErrores(): void {
+
+  mensajeFormulario.innerText = '';
+
+  for (const id of ['dni', 'apellido', 'nombres', 'numWhatsapp', 'direccion', 'observacion']) {
+   const input = (document.getElementById(id)!.querySelector('input') as HTMLInputElement);
+   input.classList.remove('error');
+   input.placeholder = placeholders[id];
+  }
+
+ }
+
+ export function mostrarErrorCampo(id: string, mensaje: string): void {
+
+  const input = (document.getElementById(id)!.querySelector('input') as HTMLInputElement);
+  input.classList.add('error');
+  input.value = '';
+  input.placeholder = mensaje;
+
+ }
+
+ export function mostrarErroresValidacion(errores: Record<string, string>): void {
+
+  for (const [campo, mensaje] of Object.entries(errores)) {
+   mostrarErrorCampo(campo, mensaje);
   }
 
  }

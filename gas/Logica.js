@@ -30,13 +30,17 @@ function logicaBuscar(dni) {
   return ciudadano;
 }
 
-function logicaEditar(datosCiudadano) {
+function logicaEditar(datosCiudadano, dni) {
   const validacion = validarDatos(datosCiudadano);
   if (!validacion.esValido) {
     return { exito: false, error: validacion.error };
   }
 
-  const resultado = persistenciaEditar(datosCiudadano);
+  if(persistenciaBuscar(datosCiudadano.dni)) {
+    return { exito: false, error: { mensaje: `DNI: ${datosCiudadano.dni} ya existente` } }
+  }
+
+  const resultado = persistenciaEditar(datosCiudadano, dni);
   return { exito: true, datos: resultado };
 }
 
@@ -56,7 +60,7 @@ y terminal al final del string ($).
 +: Uno o mas caracteres.
 */
 
-const REGEX_OBSERVACION = /^[A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ\s.,]+$/;
+const REGEX_PARRAFO = /^[A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ\s.,]+$/;
 const REGEX_SOLO_LETRAS = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+$/;
 const REGEX_SOLO_NUMEROS = /^[0-9]+$/;
 
@@ -90,20 +94,28 @@ function validarDatos(datosCiudadano) {
   }
 
   const validacionDni = validacionNumerica(datosCiudadano.dni);
-  if (!validacionDni.esValido) {
+  if(String(datosCiudadano.dni).length < 8) {
+    errores.dni = 'DNI contiene 8 dígitos';
+  }
+  else if (!validacionDni.esValido) {
     errores.dni = 'DNI solo puede contener números';
   }
 
   const validacionNumWhatsapp = validacionNumerica(datosCiudadano.numWhatsapp);
-  if (String(datosCiudadano.numWhatsapp).trim() !== ''
-      && !validacionNumWhatsapp.esValido) {
-    errores.numWhatsapp = 'Numero de Whatsapp solo puede contener números';
+  if (String(datosCiudadano.numWhatsapp).trim() == ''
+      || !validacionNumWhatsapp.esValido) {
+    errores.numWhatsapp = 'Solo puede contener números';
+  }
+
+  if (String(datosCiudadano.direccion).trim() == ''
+      || !REGEX_PARRAFO.test(datosCiudadano.direccion)) {
+    errores.direccion = 'Direccion inválida';
   }
 
   if (String(datosCiudadano.observacion).trim() !== ''
-      && !REGEX_OBSERVACION.test(datosCiudadano.observacion)) {
+      && !REGEX_PARRAFO.test(datosCiudadano.observacion)) {
 
-    errores.observacion = 'Observación solo puede contener letras, puntos y comas';
+    errores.observacion = 'Solo puede contener letras, punto y coma';
   }
 
   return {

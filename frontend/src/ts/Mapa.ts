@@ -32,7 +32,7 @@ export function capturarUbicacion(): void {
       inicializarMapa(ultimaLat, ultimaLng)
     },
     () => {
-      alert('No se pudo obtener la ubicación. Verifica los permisos.')
+       DOM.textoUbicacion.innerText = "No se pudo obtener la ubicación";
     },
     { enableHighAccuracy: true }
   )
