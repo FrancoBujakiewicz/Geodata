@@ -43,6 +43,25 @@ export function reintentar(): void {
   capturarUbicacion()
 }
 
+export function establecerUbicacion(lat: number, lng: number): void {
+  ultimaLat = lat;
+  ultimaLng = lng;
+
+  if (map) {
+    map.setView([lat, lng], 16);
+    if (marker) marker.setLatLng([lat, lng]);
+  } else {
+    map = L.map(DOM.mapa, { center: [lat, lng], zoom: 16, zoomControl: true });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+    marker = L.marker([lat, lng]).addTo(map);
+    setTimeout(() => map?.invalidateSize(), 200);
+  }
+
+  DOM.setUbicacionConfirmada(true);
+}
+
 function inicializarMapa(lat: number, lng: number): void {
   if (map) {
     map.setView([lat, lng], 16)

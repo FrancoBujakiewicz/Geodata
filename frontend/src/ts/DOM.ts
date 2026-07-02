@@ -23,6 +23,9 @@
  let direccion: HTMLInputElement;
  let observacion: HTMLInputElement;
 
+ let dniBusqueda: HTMLInputElement;
+ let botonBuscar: HTMLElement;
+
  let ubicacionConfirmada: boolean;
  export function setUbicacionConfirmada(value: boolean) { ubicacionConfirmada = value; }
  export function getUbicacionConfirmada() { return ubicacionConfirmada; }
@@ -49,6 +52,8 @@
   numWhatsapp,
   direccion,
   observacion,
+  dniBusqueda,
+  botonBuscar,
 
  }
 
@@ -76,6 +81,9 @@
     numWhatsapp = (document.getElementById('numWhatsapp')!.querySelector('input') as HTMLInputElement);
     direccion = (document.getElementById('direccion')!.querySelector('input') as HTMLInputElement);
     observacion = (document.getElementById('observacion')!.querySelector('input') as HTMLInputElement);
+
+    dniBusqueda = (document.getElementById('contenedorBusqueda')!.querySelector('input') as HTMLInputElement);
+    botonBuscar = (document.getElementById('contenedorBusqueda')!.querySelector('button') as HTMLElement);
 
     ubicacionConfirmada = false;
 

@@ -10,7 +10,7 @@ import * as DOM from "./ts/DOM.ts";
 import * as Acciones from "./ts/Acciones.ts";
 import * as Mapa from "./ts/Mapa.ts";
 
- window.addEventListener("DOMContentLoaded", async () => { DOM.init(); Acciones.inicializarGmail(); });
+ window.addEventListener("DOMContentLoaded", async () => { DOM.init(); Acciones.inicializarGmail(); DOM.botonBuscar.onclick = Acciones.buscarCiudadano; });
 
 (window as any).Acciones = Acciones;
 (window as any).Mapa = Mapa;

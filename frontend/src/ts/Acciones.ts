@@ -97,3 +97,47 @@
    .endpointRegistrar(datos, gmailRegistrador);
 
  }
+
+ export function buscarCiudadano(): void {
+
+  const dni = DOM.dniBusqueda.value.trim();
+  if (!dni) {
+   DOM.mensajes.innerText = 'Ingrese un DNI';
+   return;
+  }
+
+  DOM.mensajes.innerText = 'Buscando...';
+
+  const gas = (window as any).google?.script?.run;
+  if (!gas) {
+   DOM.mensajes.innerText = 'Error: GAS no disponible';
+   return;
+  }
+
+  gas
+   .withSuccessHandler((resp: any) => {
+    DOM.mensajes.innerText = '';
+    if (resp.exito) {
+     const datos = resp.datos;
+     DOM.dni.value = datos.dni || '';
+     DOM.apellido.value = datos.apellido || '';
+     DOM.nombres.value = datos.nombres || '';
+     DOM.numWhatsapp.value = datos.numWhatsapp || '';
+     DOM.direccion.value = datos.direccion || '';
+     DOM.observacion.value = datos.observacion || '';
+
+     navegacionEdicion();
+
+     if (datos.latitud && datos.longitud) {
+      Mapa.establecerUbicacion(Number(datos.latitud), Number(datos.longitud));
+     }
+    } else {
+     DOM.mensajes.innerText = resp.error || 'No se encontró el DNI';
+    }
+   })
+   .withFailureHandler(() => {
+    DOM.mensajes.innerText = 'Error de conexión';
+   })
+   .endpointBuscar(dni);
+
+ }
