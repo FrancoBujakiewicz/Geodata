@@ -8,7 +8,9 @@ import './css/visibilidad.css';
 
 import * as DOM from "./ts/DOM.ts";
 import * as Acciones from "./ts/Acciones.ts";
+import * as Mapa from "./ts/Mapa.ts";
 
  window.addEventListener("DOMContentLoaded", async () => { DOM.init(); });
 
 (window as any).Acciones = Acciones;
+(window as any).Mapa = Mapa;

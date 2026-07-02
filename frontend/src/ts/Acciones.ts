@@ -26,3 +26,12 @@
    toggle(DOM.datosCiudadano);
 
  }
+
+  export function confirmarUbicacion() {
+
+   toggle(DOM.ubicacionCorrecta);
+   toggle(DOM.ubicacionIncorrecta);
+   toggle(DOM.botonCapturarUbicacion);
+   toggle(DOM.textoUbicacion);    
+
+ }

@@ -7,6 +7,12 @@
  let mensajes: HTMLElement;
  let datosCiudadano: HTMLElement;
 
+ let mapa: HTMLElement;
+ let botonCapturarUbicacion: HTMLElement;
+ let ubicacionCorrecta: HTMLElement;
+ let ubicacionIncorrecta: HTMLElement;
+ let textoUbicacion: HTMLElement;
+
  export {
 
   busqueda,
@@ -15,7 +21,12 @@
   botonesEdicion,
   botonVolver,
   mensajes,
-  datosCiudadano
+  datosCiudadano,
+  mapa,
+  botonCapturarUbicacion,
+  ubicacionCorrecta,
+  ubicacionIncorrecta,
+  textoUbicacion
 
  }
 
@@ -28,5 +39,11 @@
     mensajes = document.getElementById('mensajes')!;
     datosCiudadano = document.getElementById('datosCiudadano')!;
     botonesEdicion = document.getElementById('botonesEdicion')!;
+
+    mapa = document.getElementById('mapa')!;
+    botonCapturarUbicacion = document.getElementById('botonCapturarUbicacion')!;
+    ubicacionCorrecta = document.getElementById('ubicacionCorrecta')!;
+    ubicacionIncorrecta = document.getElementById('ubicacionIncorrecta')!;
+    textoUbicacion = document.getElementById('textoUbicacion')!;
 
  }

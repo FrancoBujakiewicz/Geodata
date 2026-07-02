@@ -77,19 +77,18 @@
     <input type="text" placeholder="Ingresar observación (Opcional)" class="campo"></input>
     </div>
 
-    <div>
+     <div>
       <p>Ubicación</p>
-      <div id="mapa">
-      <center><p>¿La ubicación es correcta?</p></center>
-      </div>
+      <center><div id="mapa"></div></center>
+      <center><p id="textoUbicacion">Presione "Capturar ubicación"</p></center>
     </div>
 
     <div id="botonesMapa">
 
-     <center><button id="botonCapturarUbicacion">Capturar ubicación</button></center>
+     <center><button id="botonCapturarUbicacion" onclick="Mapa.capturarUbicacion()">Capturar ubicación</button></center>
 
-     <button id="ubicacionCorrecta" class="invisible">Confirmar ubicación</button>
-     <button id="ubicacionIncorrecta" class="invisible">Intentar de nuevo</button>
+     <button id="ubicacionCorrecta" class="invisible" onclick="Acciones.confirmarUbicacion()">Confirmar ubicación</button>
+     <button id="ubicacionIncorrecta" class="invisible" onclick="Mapa.reintentar()">Intentar de nuevo</button>
     </div>
     
     <div id="seccionEnvio">
