@@ -25,6 +25,9 @@
 
  let dniBusqueda: HTMLInputElement;
  let botonBuscar: HTMLElement;
+ let botonEliminar: HTMLElement;
+ let botonEnvio: HTMLElement;
+ let botonesMapa: HTMLElement;
 
  let ubicacionConfirmada: boolean;
  export function setUbicacionConfirmada(value: boolean) { ubicacionConfirmada = value; }
@@ -54,6 +57,9 @@
   observacion,
   dniBusqueda,
   botonBuscar,
+  botonEliminar,
+  botonEnvio,
+  botonesMapa
 
  }
 
@@ -84,6 +90,8 @@
 
     dniBusqueda = (document.getElementById('contenedorBusqueda')!.querySelector('input') as HTMLInputElement);
     botonBuscar = (document.getElementById('contenedorBusqueda')!.querySelector('button') as HTMLElement);
+    botonEliminar = (document.getElementById('botonEliminar') as HTMLElement);
+    botonesMapa = (document.getElementById('botonesMapa') as HTMLElement);
 
     ubicacionConfirmada = false;
 

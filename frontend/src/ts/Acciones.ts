@@ -31,10 +31,11 @@
 
    DOM.botonEnviar.innerText = 'Enviar';
    DOM.botonEnviar.onclick = registrarCiudadano;
+   DOM.dniBusqueda.value = '';
 
  }
 
- export function navegacionEdicion() {
+ export function navegacionEdicion(ciudadanoEliminado: boolean) {
 
    toggle(DOM.busqueda);
    toggle(DOM.botonNuevoRegistro);
@@ -43,7 +44,38 @@
    toggle(DOM.botonesEdicion);
    toggle(DOM.datosCiudadano);
 
-   DOM.botonEnviar.innerText = 'Confirmar edición';
+    if(ciudadanoEliminado){
+
+     DOM.botonEliminar.classList.add('invisible');
+     DOM.botonEliminar.classList.remove('visible');
+     DOM.botonEnviar.classList.add('invisible');
+     DOM.botonEnviar.classList.remove('visible');
+     DOM.botonesMapa.classList.add('invisible');
+     DOM.botonesMapa.classList.remove('visible');
+     DOM.textoUbicacion.classList.add('invisible');
+     DOM.textoUbicacion.classList.remove('visible');
+
+     const inputs = DOM.datosCiudadano.querySelectorAll('input');
+     inputs.forEach((input: HTMLInputElement) => { input.readOnly = true; });
+
+    } else {
+
+     DOM.botonEliminar.classList.remove('invisible');
+     DOM.botonEliminar.classList.add('visible');
+     DOM.botonEnviar.classList.remove('invisible');
+     DOM.botonEnviar.classList.add('visible');
+     DOM.botonesMapa.classList.remove('invisible');
+     DOM.botonesMapa.classList.add('visible');
+     DOM.textoUbicacion.classList.remove('invisible');
+     DOM.textoUbicacion.classList.add('visible');
+
+     const inputs = DOM.datosCiudadano.querySelectorAll('input');
+     inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
+
+    }
+
+    DOM.botonEnviar.innerText = 'Confirmar edición';
+   DOM.dniBusqueda.value = '';
 
  }
 
@@ -126,7 +158,7 @@
      DOM.direccion.value = datos.direccion || '';
      DOM.observacion.value = datos.observacion || '';
 
-     navegacionEdicion();
+     navegacionEdicion(datos.estaEliminado);
 
      if (datos.latitud && datos.longitud) {
       Mapa.establecerUbicacion(Number(datos.latitud), Number(datos.longitud));
