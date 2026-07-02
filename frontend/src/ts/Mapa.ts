@@ -14,8 +14,8 @@ L.Icon.Default.mergeOptions({ iconRetinaUrl, iconUrl, shadowUrl })
 
 let map: L.Map | null = null
 let marker: L.Marker | null = null
-let ultimaLat: number = 0
-let ultimaLng: number = 0
+export let ultimaLat: number = 0
+export let ultimaLng: number = 0
 
 export function capturarUbicacion(): void {
 

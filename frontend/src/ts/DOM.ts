@@ -13,6 +13,13 @@
  let ubicacionIncorrecta: HTMLElement;
  let textoUbicacion: HTMLElement;
 
+ let dni: HTMLInputElement;
+ let apellido: HTMLInputElement;
+ let nombres: HTMLInputElement;
+ let numWhatsapp: HTMLInputElement;
+ let direccion: HTMLInputElement;
+ let observacion: HTMLInputElement;
+
  export {
 
   busqueda,
@@ -26,7 +33,13 @@
   botonCapturarUbicacion,
   ubicacionCorrecta,
   ubicacionIncorrecta,
-  textoUbicacion
+  textoUbicacion,
+  dni,
+  apellido,
+  nombres,
+  numWhatsapp,
+  direccion,
+  observacion
 
  }
 
@@ -45,5 +58,27 @@
     ubicacionCorrecta = document.getElementById('ubicacionCorrecta')!;
     ubicacionIncorrecta = document.getElementById('ubicacionIncorrecta')!;
     textoUbicacion = document.getElementById('textoUbicacion')!;
+
+    dni = (document.getElementById('dni')!.querySelector('input') as HTMLInputElement);
+    apellido = (document.getElementById('apellido')!.querySelector('input') as HTMLInputElement);
+    nombres = (document.getElementById('nombres')!.querySelector('input') as HTMLInputElement);
+    numWhatsapp = (document.getElementById('numWhatsapp')!.querySelector('input') as HTMLInputElement);
+    direccion = (document.getElementById('direccion')!.querySelector('input') as HTMLInputElement);
+    observacion = (document.getElementById('observacion')!.querySelector('input') as HTMLInputElement);
+
+ }
+
+ export function obtenerDatosCiudadano(longitud: number, latitud: number): Record<string, any> {
+
+  return {
+   dni: dni.value,
+   nombres: nombres.value,
+   apellido: apellido.value,
+   numWhatsapp: numWhatsapp.value,
+   longitud: longitud,
+   latitud: latitud,
+   direccion: direccion.value,
+   observacion: observacion.value
+  }
 
  }
