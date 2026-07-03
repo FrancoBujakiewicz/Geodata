@@ -2,10 +2,10 @@
 const SHEET_ID = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
 const sheet = SpreadsheetApp.openById(SHEET_ID).getActiveSheet();
 
-const numeroDeCampos = 10;
+const numeroDeCampos = 9;
 const rangoCiudadano = sheet.getRange(1, 1, 1, numeroDeCampos);
 
-function persistenciaRegistrar(datosCiudadano, gmailRegistrador) {
+function persistenciaRegistrar(datosCiudadano) {
   const lock = LockService.getScriptLock();
 
   try {
@@ -21,7 +21,6 @@ function persistenciaRegistrar(datosCiudadano, gmailRegistrador) {
       datosCiudadano.direccion,
       datosCiudadano.observacion,
       false, // estaEliminado
-      gmailRegistrador
     ]);
 
     return datosCiudadano;
@@ -51,7 +50,6 @@ function persistenciaBuscar(dni) {
         direccion: fila[6],
         observacion: fila[7],
         estaEliminado: fila[8],
-        registrador: fila[9],
         _fila: i + 1
       };
     }
@@ -134,12 +132,12 @@ function persistenciaEliminar(dni) {
 
 function inicializarSheet() {
 
-  sheet.clear(); // DEJA LA SHEET EN BLANCO!
+  sheet.clear();
 
   sheet.appendRow([
     'dni', 'nombres', 'apellido', 'num_whatsapp',
     'longitud', 'latitud', 'direccion', 'observacion',
-    'estaEliminado', 'registrador'
+    'estaEliminado'
   ]);
 
   rangoCiudadano.setFontWeight('bold');

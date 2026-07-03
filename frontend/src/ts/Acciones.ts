@@ -2,23 +2,9 @@
  import * as DOM from "./DOM.ts";
  import * as Mapa from "./Mapa.ts";
  
- let gmailRegistrador: string = '';
-
  export function toggle(e: HTMLElement): void
 
  { e.classList.toggle('visible', !e.classList.toggle('invisible')); }
-
- export function inicializarGmail(): void {
-
-  const gas = (window as any).google?.script?.run;
-  if (!gas) return;
-
-  gas
-   .withSuccessHandler((email: string) => { gmailRegistrador = email; })
-   .withFailureHandler(() => {})
-   .endpointObtenerGmail();
-
- }
 
  export function navegacionToggle() {
 
@@ -126,7 +112,7 @@
    .withFailureHandler(() => {
     DOM.mensajeFormulario.innerText = 'Error de conexión';
    })
-   .endpointRegistrar(datos, gmailRegistrador);
+   .endpointRegistrar(datos);
 
  }
 

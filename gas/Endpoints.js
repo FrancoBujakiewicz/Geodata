@@ -1,9 +1,9 @@
 
  function doGet() { return HtmlService.createHtmlOutputFromFile('index'); }
 
-function endpointRegistrar(datosCiudadano, gmailRegistrador) {
+function endpointRegistrar(datosCiudadano) {
   try {
-    return logicaRegistar(datosCiudadano, gmailRegistrador);
+    return logicaRegistar(datosCiudadano);
   } catch (error) {
     return { exito: false, error: error.message };
   }

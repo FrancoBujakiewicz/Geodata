@@ -1,4 +1,4 @@
-function logicaRegistar(datosCiudadano, gmailRegistrador) {
+function logicaRegistar(datosCiudadano) {
   const validacion = validarDatos(datosCiudadano);
   if (!validacion.esValido) {
     return { exito: false, error: validacion.error };
@@ -9,7 +9,7 @@ function logicaRegistar(datosCiudadano, gmailRegistrador) {
   }
 
   try {
-    const resultado = persistenciaRegistrar(datosCiudadano, gmailRegistrador);
+    const resultado = persistenciaRegistrar(datosCiudadano);
     return { exito: true, datos: resultado };
   } catch (error) {
     throw new Error("Lo sentimos, no se pudo registrar.");
