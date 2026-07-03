@@ -1,10 +1,6 @@
 
  function doGet() { return HtmlService.createHtmlOutputFromFile('index'); }
 
-function endpointObtenerGmail() {
-  return Session.getActiveUser().getEmail();
-}
-
 function endpointRegistrar(datosCiudadano, gmailRegistrador) {
   try {
     return logicaRegistar(datosCiudadano, gmailRegistrador);

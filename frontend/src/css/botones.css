@@ -18,7 +18,7 @@ button {
 button:hover { transform: scale(1.05); }
 button:active { transform: scale(1.33); }
 
-#botonBuscar, #botonNuevoRegistro, #datosCiudadanoVolver, #edicionVolver {
+#botonBuscar, #botonNuevoRegistro, #datosCiudadanoVolver, #edicionVolver, #botonInicioSesion {
 
   background: linear-gradient(
     180deg,
@@ -29,7 +29,7 @@ button:active { transform: scale(1.33); }
 
 }
 
-#datosCiudadanoVolver { width: 325px; }
+#datosCiudadanoVolver, #botonInicioSesion { width: 325px; }
 
 #botonNuevoRegistro { padding: 7.5px; }
 
