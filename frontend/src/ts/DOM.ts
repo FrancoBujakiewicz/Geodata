@@ -33,6 +33,9 @@
  export function setUbicacionConfirmada(value: boolean) { ubicacionConfirmada = value; }
  export function getUbicacionConfirmada() { return ubicacionConfirmada; }
 
+ let registrarHandler: () => void;
+ export function setRegistrarHandler(handler: () => void) { registrarHandler = handler; }
+
  export {
 
   busqueda,
@@ -150,4 +153,67 @@
    mostrarErrorCampo(campo, mensaje);
   }
 
+ }
+
+ export function toggle(e: HTMLElement): void {
+  e.classList.toggle('visible', !e.classList.toggle('invisible'));
+ }
+
+ export function navegacionToggle() {
+  toggle(busqueda);
+  toggle(botonNuevoRegistro);
+  toggle(contenedorBotones);
+  toggle(mensajes);
+  toggle(botonVolver);
+  toggle(datosCiudadano);
+
+  botonEnviar.innerText = 'Enviar';
+  botonEnviar.onclick = registrarHandler;
+  dniBusqueda.value = '';
+ }
+
+ export function navegacionEdicion(ciudadanoEliminado: boolean) {
+  toggle(busqueda);
+  toggle(botonNuevoRegistro);
+  toggle(contenedorBotones);
+  toggle(mensajes);
+  toggle(botonesEdicion);
+  toggle(datosCiudadano);
+
+  if(ciudadanoEliminado) {
+    botonEliminar.classList.add('invisible');
+    botonEliminar.classList.remove('visible');
+    botonEnviar.classList.add('invisible');
+    botonEnviar.classList.remove('visible');
+    botonesMapa.classList.add('invisible');
+    botonesMapa.classList.remove('visible');
+    textoUbicacion.classList.add('invisible');
+    textoUbicacion.classList.remove('visible');
+
+    const inputs = datosCiudadano.querySelectorAll('input');
+    inputs.forEach((input: HTMLInputElement) => { input.readOnly = true; });
+  } else {
+    botonEliminar.classList.remove('invisible');
+    botonEliminar.classList.add('visible');
+    botonEnviar.classList.remove('invisible');
+    botonEnviar.classList.add('visible');
+    botonesMapa.classList.remove('invisible');
+    botonesMapa.classList.add('visible');
+    textoUbicacion.classList.remove('invisible');
+    textoUbicacion.classList.add('visible');
+
+    const inputs = datosCiudadano.querySelectorAll('input');
+    inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
+  }
+
+  botonEnviar.innerText = 'Confirmar edición';
+  dniBusqueda.value = '';
+ }
+
+ export function confirmarUbicacion() {
+  toggle(ubicacionCorrecta);
+  toggle(ubicacionIncorrecta);
+  toggle(botonCapturarUbicacion);
+  toggle(textoUbicacion);
+  setUbicacionConfirmada(true);
  }

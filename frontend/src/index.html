@@ -26,7 +26,7 @@
 
      <div id="mensajes"></div>
 
-     <button id="botonNuevoRegistro" onclick="Acciones.navegacionToggle()">Nuevo registro</button>
+      <button id="botonNuevoRegistro" onclick="DOM.navegacionToggle()">Nuevo registro</button>
 
      <div id="contenedorBotones">
         <button id="botonCerrarSesion">Cerrar sesión</button>
@@ -34,11 +34,11 @@
      </div>
 
      <div id="botonVolver" class="invisible"> 
-      <button id="datosCiudadanoVolver" onclick="Acciones.navegacionToggle()">Volver</button>
+       <button id="datosCiudadanoVolver" onclick="DOM.navegacionToggle()">Volver</button>
      </div>
 
      <div id="botonesEdicion" class="invisible">
-      <button id="edicionVolver" onclick="Acciones.navegacionEdicion()">Volver</button>
+       <button id="edicionVolver" onclick="DOM.navegacionEdicion()">Volver</button>
       <button id="botonEliminar">Eliminar</button> 
      </div> 
 
@@ -84,7 +84,7 @@
 
      <center><button id="botonCapturarUbicacion" onclick="Mapa.capturarUbicacion()">Capturar ubicación</button></center>
 
-     <button id="ubicacionCorrecta" class="invisible" onclick="Acciones.confirmarUbicacion()">Confirmar ubicación</button>
+      <button id="ubicacionCorrecta" class="invisible" onclick="DOM.confirmarUbicacion()">Confirmar ubicación</button>
      <button id="ubicacionIncorrecta" class="invisible" onclick="Mapa.reintentar()">Intentar de nuevo</button>
     </div>
     

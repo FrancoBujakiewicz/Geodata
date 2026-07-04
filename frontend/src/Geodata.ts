@@ -7,11 +7,16 @@ import './css/contenedorPrincipal.css';
 import './css/visibilidad.css';
 
 import * as DOM from "./ts/DOM.ts";
-import * as Acciones from "./ts/Acciones.ts";
+import * as Peticiones from "./ts/Peticiones.ts";
 import * as Mapa from "./ts/Mapa.ts";
 
- window.addEventListener("DOMContentLoaded", async () => { DOM.init(); Acciones.inicializarGmail(); DOM.botonBuscar.onclick = Acciones.buscarCiudadano; });
+window.addEventListener("DOMContentLoaded", async () => {
+  DOM.init();
+  DOM.setRegistrarHandler(Peticiones.registrarCiudadano);
+  Peticiones.inicializarGmail();
+  DOM.botonBuscar.onclick = Peticiones.buscarCiudadano;
+});
 
-(window as any).Acciones = Acciones;
+(window as any).Peticiones = Peticiones;
+(window as any).DOM = DOM;
 (window as any).Mapa = Mapa;
-
