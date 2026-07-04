@@ -1,5 +1,6 @@
+import * as Mapa from './Mapa.ts'
 
- let busqueda: HTMLElement;
+let busqueda: HTMLElement;
  let botonNuevoRegistro: HTMLElement;
  let botonVolver: HTMLElement;
  let botonesEdicion: HTMLElement;
@@ -159,7 +160,18 @@
   e.classList.toggle('visible', !e.classList.toggle('invisible'));
  }
 
- export function navegacionToggle() {
+function limpiarCampos(): void {
+  dni.value = '';
+  apellido.value = '';
+  nombres.value = '';
+  numWhatsapp.value = '';
+  direccion.value = '';
+  observacion.value = '';
+  dniBusqueda.value = '';
+  limpiarErrores();
+}
+
+export function navegacionToggle() {
   toggle(busqueda);
   toggle(botonNuevoRegistro);
   toggle(contenedorBotones);
@@ -169,16 +181,25 @@
 
   botonEnviar.innerText = 'Enviar';
   botonEnviar.onclick = registrarHandler;
-  dniBusqueda.value = '';
+  limpiarCampos();
+  Mapa.resetMapa();
  }
 
- export function navegacionEdicion(ciudadanoEliminado: boolean) {
+ export function navegacionEdicion(ciudadanoEliminado?: boolean) {
   toggle(busqueda);
   toggle(botonNuevoRegistro);
   toggle(contenedorBotones);
   toggle(mensajes);
   toggle(botonesEdicion);
   toggle(datosCiudadano);
+
+  if (ciudadanoEliminado === undefined) {
+    botonEnviar.innerText = 'Enviar';
+    botonEnviar.onclick = registrarHandler;
+    limpiarCampos();
+    Mapa.resetMapa();
+    return;
+  }
 
   if(ciudadanoEliminado) {
     botonEliminar.classList.add('invisible');

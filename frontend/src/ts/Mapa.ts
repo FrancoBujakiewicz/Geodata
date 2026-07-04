@@ -43,6 +43,26 @@ export function reintentar(): void {
   capturarUbicacion()
 }
 
+export function resetMapa(): void {
+  if (map) {
+    map.remove();
+    map = null;
+    marker = null;
+  }
+  ultimaLat = 0;
+  ultimaLng = 0;
+  DOM.setUbicacionConfirmada(false);
+
+  DOM.textoUbicacion.innerText = 'Presione "Capturar ubicación"';
+
+  DOM.botonCapturarUbicacion.classList.remove('invisible', 'visible');
+  DOM.ubicacionCorrecta.classList.remove('visible');
+  DOM.ubicacionCorrecta.classList.add('invisible');
+  DOM.ubicacionIncorrecta.classList.remove('visible');
+  DOM.ubicacionIncorrecta.classList.add('invisible');
+  DOM.textoUbicacion.classList.remove('invisible', 'visible');
+}
+
 export function establecerUbicacion(lat: number, lng: number): void {
   ultimaLat = lat;
   ultimaLng = lng;
