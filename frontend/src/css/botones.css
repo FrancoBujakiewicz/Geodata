@@ -33,7 +33,7 @@ button:active { transform: scale(1.33); }
 
 #botonNuevoRegistro { padding: 7.5px; }
 
-#contenedorBotones, #botonesMapa {
+#botonesMapa {
 
  display: flex;
  flex-direction: column;
@@ -41,7 +41,7 @@ button:active { transform: scale(1.33); }
 
 }
 
-#contenedorBotones button, #botonCapturarUbicacion, #seccionEnvio button, #botonEditar {
+#botonCapturarUbicacion, #seccionEnvio button, #botonEditar {
 
 width: 215px;
 background: linear-gradient(

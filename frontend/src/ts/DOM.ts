@@ -4,7 +4,6 @@ let busqueda: HTMLElement;
  let botonNuevoRegistro: HTMLElement;
  let botonVolver: HTMLElement;
  let botonesEdicion: HTMLElement;
- let contenedorBotones: HTMLElement;
  let mensajes: HTMLElement;
  let datosCiudadano: HTMLElement;
 
@@ -41,7 +40,6 @@ let busqueda: HTMLElement;
 
   busqueda,
   botonNuevoRegistro,
-  contenedorBotones,
   botonesEdicion,
   botonVolver,
   mensajes,
@@ -72,7 +70,6 @@ let busqueda: HTMLElement;
     busqueda = document.getElementById('busqueda')!;
     botonNuevoRegistro = document.getElementById('botonNuevoRegistro')!;
     botonVolver = document.getElementById('botonVolver')!;
-    contenedorBotones = document.getElementById('contenedorBotones')!;
     mensajes = document.getElementById('mensajes')!;
     datosCiudadano = document.getElementById('datosCiudadano')!;
     botonesEdicion = document.getElementById('botonesEdicion')!;
@@ -174,7 +171,6 @@ function limpiarCampos(): void {
 export function navegacionToggle() {
   toggle(busqueda);
   toggle(botonNuevoRegistro);
-  toggle(contenedorBotones);
   toggle(mensajes);
   toggle(botonVolver);
   toggle(datosCiudadano);
@@ -188,7 +184,6 @@ export function navegacionToggle() {
  export function navegacionEdicion(ciudadanoEliminado?: boolean) {
   toggle(busqueda);
   toggle(botonNuevoRegistro);
-  toggle(contenedorBotones);
   toggle(mensajes);
   toggle(botonesEdicion);
   toggle(datosCiudadano);
