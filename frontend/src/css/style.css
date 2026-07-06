@@ -32,4 +32,20 @@ main {
   align-items: center;
   
 }
-#mensajes { height: 20px; }
+#mensajes, #textoUbicacion, #mensajeFormulario { 
+
+  height: 20px; 
+  font-size: 20px;
+  font-weight: bold;
+  animation: pulso 2s ease-in-out infinite;
+
+}
+
+@keyframes pulso {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}

@@ -40,6 +40,10 @@ export function capturarUbicacion(): void {
 }
 
 export function reintentar(): void {
+  DOM.ubicacionCorrecta.classList.add('invisible');
+  DOM.ubicacionCorrecta.classList.remove('visible');
+  DOM.ubicacionIncorrecta.classList.add('invisible');
+  DOM.ubicacionIncorrecta.classList.remove('visible');
   capturarUbicacion()
 }
 
@@ -60,7 +64,7 @@ export function resetMapa(): void {
   DOM.ubicacionCorrecta.classList.add('invisible');
   DOM.ubicacionIncorrecta.classList.remove('visible');
   DOM.ubicacionIncorrecta.classList.add('invisible');
-  DOM.textoUbicacion.classList.remove('invisible', 'visible');
+
 }
 
 export function establecerUbicacion(lat: number, lng: number): void {
@@ -84,10 +88,16 @@ export function establecerUbicacion(lat: number, lng: number): void {
 
 function inicializarMapa(lat: number, lng: number): void {
   if (map) {
-    map.setView([lat, lng], 16)
-    if (marker) marker.setLatLng([lat, lng]) {
+    map.setView([lat, lng], 16);
+    if (marker) marker.setLatLng([lat, lng]);
+    DOM.botonCapturarUbicacion.classList.remove('visible');
+    DOM.botonCapturarUbicacion.classList.add('invisible');
+    DOM.ubicacionCorrecta.classList.remove('invisible');
+    DOM.ubicacionCorrecta.classList.add('visible');
+    DOM.ubicacionIncorrecta.classList.remove('invisible');
+    DOM.ubicacionIncorrecta.classList.add('visible');
     DOM.textoUbicacion.innerText = "¿La ubicación es correcta?";
-    return
+    return;
   }
 
   map = L.map(DOM.mapa, { center: [lat, lng], zoom: 16, zoomControl: true })

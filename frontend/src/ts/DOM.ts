@@ -238,6 +238,6 @@ export function navegacionToggle() {
   toggle(ubicacionCorrecta);
   toggle(ubicacionIncorrecta);
   toggle(botonCapturarUbicacion);
-  toggle(textoUbicacion);
+  textoUbicacion.innerText = '';
   setUbicacionConfirmada(true);
  }
