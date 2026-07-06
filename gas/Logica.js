@@ -5,7 +5,7 @@ function logicaRegistar(datosCiudadano) {
   }
 
   if (persistenciaBuscar(datosCiudadano.dni)) {
-    throw new Error(`El ciudadano con DNI: ${datosCiudadano.dni} ya se encuentra registrado`);
+    throw new Error(`DNI ya se encuentra registrado`);
   }
 
   try {
@@ -24,7 +24,7 @@ function logicaBuscar(dni) {
   const ciudadano = persistenciaBuscar(dni);
 
   if (!ciudadano) {
-    throw new Error(`Ciudadano con DNI: ${dni} no encontrado`);
+    throw new Error(`DNI no encontrado`);
   }
 
   return ciudadano;

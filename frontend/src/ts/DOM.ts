@@ -183,6 +183,7 @@ export function navegacionToggle() {
   mensajes.innerText = '';  
   limpiarCampos();
   Mapa.resetMapa();
+  dni.readOnly = false;
  }
 
  export function navegacionEdicion(ciudadanoEliminado?: boolean) {

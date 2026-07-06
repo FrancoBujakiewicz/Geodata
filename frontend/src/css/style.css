@@ -41,10 +41,13 @@ main {
 
 #mensajes, #textoUbicacion, #mensajeFormulario { 
 
-  height: 20px; 
+  height: 20px;
+  width: 300px; 
   font-size: 20px;
   font-weight: bold;
   animation: pulso 2s ease-in-out infinite;
+  text-align: center;
+
 
 }
 
