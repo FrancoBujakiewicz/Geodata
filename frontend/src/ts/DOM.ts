@@ -28,6 +28,7 @@ let busqueda: HTMLElement;
  let botonEliminar: HTMLElement;
  let botonEnvio: HTMLElement;
  let botonesMapa: HTMLElement;
+ let contenedorBusqueda: HTMLElement;
 
  let ubicacionConfirmada: boolean;
  export function setUbicacionConfirmada(value: boolean) { ubicacionConfirmada = value; }
@@ -61,7 +62,8 @@ let busqueda: HTMLElement;
   botonBuscar,
   botonEliminar,
   botonEnvio,
-  botonesMapa
+  botonesMapa,
+  contenedorBusqueda
 
  }
 
@@ -90,7 +92,8 @@ let busqueda: HTMLElement;
     observacion = (document.getElementById('observacion')!.querySelector('input') as HTMLInputElement);
 
     dniBusqueda = (document.getElementById('contenedorBusqueda')!.querySelector('input') as HTMLInputElement);
-    botonBuscar = (document.getElementById('contenedorBusqueda')!.querySelector('button') as HTMLElement);
+    botonBuscar = document.getElementById('botonBuscar')!;
+    contenedorBusqueda = document.getElementById('contenedorBusqueda')!;
     botonEliminar = (document.getElementById('botonEliminar') as HTMLElement);
     botonesMapa = (document.getElementById('botonesMapa') as HTMLElement);
 
@@ -169,7 +172,9 @@ function limpiarCampos(): void {
 }
 
 export function navegacionToggle() {
-  toggle(busqueda);
+  
+  toggle(contenedorBusqueda);
+  toggle(botonBuscar);
   toggle(botonNuevoRegistro);
   toggle(mensajes);
   toggle(botonVolver);
@@ -177,20 +182,25 @@ export function navegacionToggle() {
 
   botonEnviar.innerText = 'Enviar';
   botonEnviar.onclick = registrarHandler;
+  mensajes.innerText = '';  
   limpiarCampos();
   Mapa.resetMapa();
  }
 
  export function navegacionEdicion(ciudadanoEliminado?: boolean) {
-  toggle(busqueda);
+
+  toggle(contenedorBusqueda);
+  toggle(botonBuscar);
   toggle(botonNuevoRegistro);
   toggle(mensajes);
   toggle(botonesEdicion);
+  toggle(botonEliminar);
   toggle(datosCiudadano);
 
   if (ciudadanoEliminado === undefined) {
     botonEnviar.innerText = 'Enviar';
     botonEnviar.onclick = registrarHandler;
+    mensajes.innerText = '';
     limpiarCampos();
     Mapa.resetMapa();
     return;
@@ -233,6 +243,7 @@ export function navegacionToggle() {
   toggle(ubicacionCorrecta);
   toggle(ubicacionIncorrecta);
   toggle(botonCapturarUbicacion);
-  textoUbicacion.innerText = '';
+  textoUbicacion.innerText = 'Ubicación confirmada';
+  mensajeFormulario.innerText = '';
   setUbicacionConfirmada(true);
  }

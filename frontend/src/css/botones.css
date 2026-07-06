@@ -41,7 +41,7 @@ button:active { transform: scale(1.33); }
 
 }
 
-#botonCapturarUbicacion, #seccionEnvio button, #botonEditar {
+#botonCapturarUbicacion, #seccionEnvio #boton, #botonEditar {
 
 width: 215px;
 background: linear-gradient(
@@ -51,6 +51,8 @@ background: linear-gradient(
   );
 
 }
+
+#botonCapturarUbicacion { margin-bottom: 20px; }
 
 #ubicacionCorrecta {
 
@@ -72,7 +74,8 @@ background: linear-gradient(
 
 }
 
-#botonEliminar, #edicionVolver { width: 350px; }
+#edicionVolver { width: 350px; }
+#botonEliminar { width: 215px; }
 
 #botonesEdicion, #botonesEdicion center { 
 

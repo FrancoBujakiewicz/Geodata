@@ -1,12 +1,22 @@
-#busqueda { width: 100%; }
 
-#busqueda p { font-size: 20px; }
+
+
+#contenedorBusqueda p { font-size: 25px; }
+
+#contenedorBusqueda input {
+
+  width: 200px;
+  font-size: 17.5px;
+  font-weight: 500;
+
+}
 
 #contenedorBusqueda {
 
  display: flex;
- align-items: left;
- gap: 30px;
+ align-items: center;
+ flex-direction: column;
+ margin-top: 20px;
 
 }
 
