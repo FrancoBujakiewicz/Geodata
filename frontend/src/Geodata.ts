@@ -12,7 +12,6 @@ import * as Mapa from "./ts/Mapa.ts";
 
 window.addEventListener("DOMContentLoaded", async () => {
   DOM.init();
-  DOM.setRegistrarHandler(Peticiones.registrarCiudadano);
   DOM.botonBuscar.onclick = Peticiones.buscarCiudadano;
 });
 

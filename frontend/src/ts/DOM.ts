@@ -1,4 +1,5 @@
 import * as Mapa from './Mapa.ts'
+import { registrarCiudadano } from './Peticiones.ts';
 
 let busqueda: HTMLElement;
  let botonNuevoRegistro: HTMLElement;
@@ -33,9 +34,6 @@ let busqueda: HTMLElement;
  let ubicacionConfirmada: boolean;
  export function setUbicacionConfirmada(value: boolean) { ubicacionConfirmada = value; }
  export function getUbicacionConfirmada() { return ubicacionConfirmada; }
-
- let registrarHandler: () => void;
- export function setRegistrarHandler(handler: () => void) { registrarHandler = handler; }
 
  export {
 
@@ -181,7 +179,7 @@ export function navegacionToggle() {
   toggle(datosCiudadano);
 
   botonEnviar.innerText = 'Enviar';
-  botonEnviar.onclick = registrarHandler;
+  botonEnviar.onclick = registrarCiudadano;
   mensajes.innerText = '';  
   limpiarCampos();
   Mapa.resetMapa();
@@ -199,7 +197,7 @@ export function navegacionToggle() {
 
   if (ciudadanoEliminado === undefined) {
     botonEnviar.innerText = 'Enviar';
-    //botonEnviar.onclick = registrarHandler;
+    //botonEnviar.onclick = accionHandler;
     mensajes.innerText = '';
     limpiarCampos();
     Mapa.resetMapa();
