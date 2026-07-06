@@ -36,7 +36,7 @@ export function capturarUbicacion(): void {
     },
     { enableHighAccuracy: true }
   )
-
+ 
 }
 
 export function reintentar(): void {
@@ -85,8 +85,8 @@ export function establecerUbicacion(lat: number, lng: number): void {
 function inicializarMapa(lat: number, lng: number): void {
   if (map) {
     map.setView([lat, lng], 16)
-    if (marker) marker.setLatLng([lat, lng])
-    DOM.textoUbicacion.innerText = "¿La ubicación es correcta?"
+    if (marker) marker.setLatLng([lat, lng]) {
+    DOM.textoUbicacion.innerText = "¿La ubicación es correcta?";
     return
   }
 

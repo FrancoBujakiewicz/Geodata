@@ -30,17 +30,13 @@ function logicaBuscar(dni) {
   return ciudadano;
 }
 
-function logicaEditar(datosCiudadano, dni) {
+function logicaEditar(datosCiudadano) {
   const validacion = validarDatos(datosCiudadano);
   if (!validacion.esValido) {
     return { exito: false, error: validacion.error };
   }
 
-  if(persistenciaBuscar(datosCiudadano.dni)) {
-    return { exito: false, error: { mensaje: `DNI: ${datosCiudadano.dni} ya existente` } }
-  }
-
-  const resultado = persistenciaEditar(datosCiudadano, dni);
+  const resultado = persistenciaEditar(datosCiudadano);
   return { exito: true, datos: resultado };
 }
 

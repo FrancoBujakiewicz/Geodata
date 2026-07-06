@@ -4,13 +4,6 @@ import * as Mapa from "./Mapa.ts";
 
 const gas = (window as any)?.google?.script?.run;
 
-export function inicializarGmail() {
-  if (!gas) {
-    DOM.mensajes.innerText = 'GAS no disponible';
-    return;
-  }
-}
-
 export function registrarCiudadano(): void {
   if(!DOM.getUbicacionConfirmada()) {
     DOM.mensajeFormulario.innerText = 'No se confirmó la ubicación';

@@ -225,6 +225,9 @@ export function navegacionToggle() {
 
     const inputs = datosCiudadano.querySelectorAll('input');
     inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
+    const dni = (document.getElementById('dni')!.querySelector('input') as HTMLInputElement);
+    dni.readOnly = true;
+
   }
 
   botonEnviar.innerText = 'Confirmar edición';
