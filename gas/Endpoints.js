@@ -1,5 +1,11 @@
 
- function doGet() { return HtmlService.createHtmlOutputFromFile('index'); }
+ function doGet() { 
+
+  var page = HtmlService.createHtmlOutputFromFile('index'); 
+  page.addMetaTag('viewport', 'width=device-width, initial-scale=0.85, maximum-scale=0.85, minimum-scale=0.85, user-scalable=no');
+  return page;
+
+}
 
 function endpointRegistrar(datosCiudadano) {
   try {

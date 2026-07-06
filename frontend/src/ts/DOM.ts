@@ -199,7 +199,7 @@ export function navegacionToggle() {
 
   if (ciudadanoEliminado === undefined) {
     botonEnviar.innerText = 'Enviar';
-    botonEnviar.onclick = registrarHandler;
+    //botonEnviar.onclick = registrarHandler;
     mensajes.innerText = '';
     limpiarCampos();
     Mapa.resetMapa();
