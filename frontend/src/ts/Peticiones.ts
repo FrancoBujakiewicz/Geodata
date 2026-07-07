@@ -79,3 +79,38 @@ export function buscarCiudadano(): void {
     })
     .endpointBuscar(dni);
 }
+
+export function editarCiudadano(): void {
+  if(!DOM.getUbicacionConfirmada()) {
+    DOM.mensajeFormulario.innerText = 'No se confirmó la ubicación';
+    return;
+  }
+
+  DOM.limpiarErrores();
+  DOM.mensajeFormulario.innerText = 'Enviando...';
+
+  const datos = DOM.obtenerDatosCiudadano(Mapa.ultimaLng, Mapa.ultimaLat);
+
+  if (!gas) {
+    DOM.mensajeFormulario.innerText = 'Error: GAS no disponible';
+    return;
+  }
+
+  gas
+    .withSuccessHandler((resp: any) => {
+      if (resp.exito) {
+        DOM.mensajeFormulario.innerText = 'Editado correctamente';
+      } else {
+        if (typeof resp.error === 'object') {
+          DOM.mostrarErroresValidacion(resp.error);
+          DOM.mensajeFormulario.innerText = 'Campos con errores';
+        } else {
+          DOM.mensajeFormulario.innerText = String(resp.error);
+        }
+      }
+    })
+    .withFailureHandler(() => {
+      DOM.mensajeFormulario.innerText = 'Error de conexión';
+    })
+    .endpointEditar(datos);
+}

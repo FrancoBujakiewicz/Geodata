@@ -59,12 +59,12 @@ function persistenciaBuscar(dni) {
 
 }
 
-function persistenciaEditar(datosCiudadano, dni) {
+function persistenciaEditar(datosCiudadano) {
 
-  const ciudadanoExistente = persistenciaBuscar(dni);
+  const ciudadanoExistente = persistenciaBuscar(datosCiudadano.dni);
  
   if (!ciudadanoExistente) {
-    throw new Error(`Ciudadano con DNI: ${dni} no encontrado`);
+    throw new Error(`DNI no encontrado`);
   }
  
  if (ciudadanoExistente.estaEliminado) {

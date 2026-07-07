@@ -1,5 +1,5 @@
 import * as Mapa from './Mapa.ts'
-import { registrarCiudadano } from './Peticiones.ts';
+import { editarCiudadano, registrarCiudadano } from './Peticiones.ts';
 
 let busqueda: HTMLElement;
  let botonNuevoRegistro: HTMLElement;
@@ -198,7 +198,7 @@ export function navegacionToggle() {
 
   if (ciudadanoEliminado === undefined) {
     botonEnviar.innerText = 'Enviar';
-    //botonEnviar.onclick = accionHandler;
+    botonEnviar.onclick = editarCiudadano;
     mensajes.innerText = '';
     limpiarCampos();
     Mapa.resetMapa();
