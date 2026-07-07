@@ -23,7 +23,7 @@ button:disabled {
   transform: none !important;
 }
 
-#botonBuscar, #botonNuevoRegistro, #datosCiudadanoVolver, #edicionVolver, #botonInicioSesion {
+#botonBuscar, #botonNuevoRegistro, #botonVolver, #edicionVolver, #botonInicioSesion {
 
   background: linear-gradient(
     180deg,

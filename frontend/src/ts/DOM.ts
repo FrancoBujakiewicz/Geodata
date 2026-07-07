@@ -225,7 +225,7 @@ export function navegacionNuevoRegistro() {
 
    mensajeFormulario.innerText = '';
    textoUbicacion.classList.remove('visible');
-   textoUbicacion.classList.remove('invisible');
+   textoUbicacion.classList.add('invisible');
    botonEliminar.innerText = 'Eliminar';
    botonEliminar.onclick = eliminarCiudadano;
    cancelar.onclick = navegacionEdicion;
