@@ -41,7 +41,7 @@ button:active { transform: scale(1.33); }
 
 }
 
-#botonCapturarUbicacion, #seccionEnvio #boton, #botonEditar {
+#botonCapturarUbicacion, #botonEditar {
 
 width: 215px;
 background: linear-gradient(
@@ -54,7 +54,7 @@ background: linear-gradient(
 
 #botonCapturarUbicacion { margin-bottom: 20px; }
 
-#ubicacionCorrecta {
+#ubicacionCorrecta, #seccionEnvio #boton {
 
   background: linear-gradient(
     180deg,
@@ -64,7 +64,7 @@ background: linear-gradient(
 
 }
 
-#ubicacionIncorrecta, #botonEliminar {
+#ubicacionIncorrecta, #botonEliminar, #cancelar {
 
   background: linear-gradient(
     180deg,
@@ -75,7 +75,7 @@ background: linear-gradient(
 }
 
 #edicionVolver { width: 310px; }
-#botonEliminar { width: 215px; }
+#botonEliminar, #cancelar, #seccionEnvio #boton { width: 215px; }
 
 #botonesEdicion, #botonesEdicion center { 
 

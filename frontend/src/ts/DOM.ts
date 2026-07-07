@@ -30,6 +30,7 @@ import { editarCiudadano, eliminarCiudadano, registrarCiudadano } from './Petici
  let botonEnvio: HTMLElement;
  let botonesMapa: HTMLElement;
  let contenedorBusqueda: HTMLElement;
+ let cancelar: HTMLElement;
 
  let ubicacionConfirmada: boolean;
  export function setUbicacionConfirmada(value: boolean) { ubicacionConfirmada = value; }
@@ -65,7 +66,8 @@ import { editarCiudadano, eliminarCiudadano, registrarCiudadano } from './Petici
   botonEliminar,
   botonEnvio,
   botonesMapa,
-  contenedorBusqueda
+  contenedorBusqueda,
+  cancelar
 
  }
 
@@ -98,6 +100,7 @@ import { editarCiudadano, eliminarCiudadano, registrarCiudadano } from './Petici
     contenedorBusqueda = document.getElementById('contenedorBusqueda')!;
     botonEliminar = (document.getElementById('botonEliminar') as HTMLElement);
     botonesMapa = (document.getElementById('botonesMapa') as HTMLElement);
+    cancelar = (document.getElementById('cancelar') as HTMLElement);
 
     ubicacionConfirmada = false;
     confirmarEliminar = false;
@@ -185,6 +188,7 @@ export function navegacionNuevoRegistro() {
 
   botonEnviar.innerText = 'Enviar';
   botonEnviar.onclick = registrarCiudadano;
+  cancelar.onclick = navegacionNuevoRegistro;
   mensajes.innerText = '';  
   limpiarCampos();
   Mapa.resetMapa();
@@ -198,6 +202,7 @@ export function navegacionNuevoRegistro() {
    mensajeFormulario.innerText = '';
    botonEliminar.innerText = 'Eliminar';
    botonEliminar.onclick = eliminarCiudadano;
+   cancelar.onclick = navegacionEdicion;
    confirmarEliminar = false;
 
   toggle(contenedorBusqueda);
