@@ -197,6 +197,8 @@ export function navegacionNuevoRegistro() {
 
    mensajeFormulario.innerText = '';
    botonEliminar.innerText = 'Eliminar';
+   botonEliminar.onclick = eliminarCiudadano;
+   confirmarEliminar = false;
 
   toggle(contenedorBusqueda);
   toggle(botonBuscar);
@@ -241,7 +243,6 @@ export function navegacionNuevoRegistro() {
     inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
     const dni = (document.getElementById('dni')!.querySelector('input') as HTMLInputElement);
     dni.readOnly = true;
-    confirmarEliminar = false;
 
   }
 
@@ -264,5 +265,6 @@ export function navegacionNuevoRegistro() {
    setConfirmarEliminar(true);
    mensajeFormulario.innerText = 'Eliminando...';
    eliminarCiudadano();
+   setConfirmarEliminar(false);
 
  }
