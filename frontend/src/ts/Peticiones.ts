@@ -114,3 +114,4 @@ export function editarCiudadano(): void {
     })
     .endpointEditar(datos);
 }
+

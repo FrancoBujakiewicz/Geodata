@@ -169,7 +169,7 @@ function limpiarCampos(): void {
   limpiarErrores();
 }
 
-export function navegacionToggle() {
+export function navegacionNuevoRegistro() {
   
   toggle(contenedorBusqueda);
   toggle(botonBuscar);

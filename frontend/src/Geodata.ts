@@ -13,6 +13,7 @@ import * as Mapa from "./ts/Mapa.ts";
 window.addEventListener("DOMContentLoaded", async () => {
   DOM.init();
   DOM.botonBuscar.onclick = Peticiones.buscarCiudadano;
+  DOM.botonEliminar.onclick = Peticiones.eliminarCiudadano;
 });
 
 (window as any).Peticiones = Peticiones;

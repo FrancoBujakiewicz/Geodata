@@ -107,7 +107,7 @@ function persistenciaEliminar(dni) {
   const ciudadanoExistente = persistenciaBuscar(dni);
  
   if (!ciudadanoExistente) {
-    throw new Error(`Ciudadano con DNI: ${dni} no encontrado`);
+    throw new Error(`DNI no encontrado`);
   }
  
   const fila = ciudadanoExistente._fila;
