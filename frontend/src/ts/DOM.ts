@@ -234,6 +234,7 @@ export function navegacionToggle() {
 
   }
 
+  botonEnviar.onclick = editarCiudadano;
   botonEnviar.innerText = 'Confirmar edición';
   dniBusqueda.value = '';
  }
