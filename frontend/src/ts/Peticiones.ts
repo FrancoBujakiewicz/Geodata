@@ -80,6 +80,42 @@ export function buscarCiudadano(): void {
     .endpointBuscar(dni);
 }
 
+export function eliminarCiudadano(): void {
+  if(!DOM.getConfirmarEliminar()) {
+    DOM.mensajeFormulario.innerText = 'Esta seguro de eliminar?';
+    DOM.botonEliminar.innerText = 'Confirmar';
+    DOM.botonEliminar.onclick = DOM.confirmarEliminacion;
+    return;
+  }
+
+  const dni = DOM.dni.value.trim();
+  if (!dni) {
+    DOM.mensajes.innerText = 'No hay un ciudadano seleccionado';
+    return;
+  }
+
+  DOM.mensajes.innerText = 'Eliminando...';
+
+  if (!gas) {
+    DOM.mensajes.innerText = 'Error: GAS no disponible';
+    return;
+  }
+
+  gas
+    .withSuccessHandler((resp: any) => {
+      if (resp.exito) {
+        DOM.mensajes.innerText = 'Eliminado correctamente';
+        DOM.navegacionEdicion(true);
+      } else {
+        DOM.mensajes.innerText = String(resp.error);
+      }
+    })
+    .withFailureHandler(() => {
+      DOM.mensajes.innerText = 'Error de conexión';
+    })
+    .endpointEliminar(dni);
+}
+
 export function editarCiudadano(): void {
   if(!DOM.getUbicacionConfirmada()) {
     DOM.mensajeFormulario.innerText = 'No se confirmó la ubicación';

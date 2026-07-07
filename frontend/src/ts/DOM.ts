@@ -1,7 +1,7 @@
 import * as Mapa from './Mapa.ts'
-import { editarCiudadano, registrarCiudadano } from './Peticiones.ts';
+import { editarCiudadano, eliminarCiudadano, registrarCiudadano } from './Peticiones.ts';
 
-let busqueda: HTMLElement;
+ let busqueda: HTMLElement;
  let botonNuevoRegistro: HTMLElement;
  let botonVolver: HTMLElement;
  let botonesEdicion: HTMLElement;
@@ -34,6 +34,10 @@ let busqueda: HTMLElement;
  let ubicacionConfirmada: boolean;
  export function setUbicacionConfirmada(value: boolean) { ubicacionConfirmada = value; }
  export function getUbicacionConfirmada() { return ubicacionConfirmada; }
+
+ let confirmarEliminar: boolean;
+ export function setConfirmarEliminar(value: boolean) { confirmarEliminar = value; }
+ export function getConfirmarEliminar() { return confirmarEliminar; }
 
  export {
 
@@ -96,6 +100,7 @@ let busqueda: HTMLElement;
     botonesMapa = (document.getElementById('botonesMapa') as HTMLElement);
 
     ubicacionConfirmada = false;
+    confirmarEliminar = false;
 
     limpiarErrores();
 
@@ -184,9 +189,14 @@ export function navegacionNuevoRegistro() {
   limpiarCampos();
   Mapa.resetMapa();
   dni.readOnly = false;
+  setConfirmarEliminar(true);
+
  }
 
  export function navegacionEdicion(ciudadanoEliminado?: boolean) {
+
+   mensajeFormulario.innerText = '';
+   botonEliminar.innerText = 'Eliminar';
 
   toggle(contenedorBusqueda);
   toggle(botonBuscar);
@@ -231,6 +241,7 @@ export function navegacionNuevoRegistro() {
     inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
     const dni = (document.getElementById('dni')!.querySelector('input') as HTMLInputElement);
     dni.readOnly = true;
+    confirmarEliminar = false;
 
   }
 
@@ -246,4 +257,12 @@ export function navegacionNuevoRegistro() {
   textoUbicacion.innerText = 'Ubicación confirmada';
   mensajeFormulario.innerText = '';
   setUbicacionConfirmada(true);
+ }
+
+ export function confirmarEliminacion() {
+
+   setConfirmarEliminar(true);
+   mensajeFormulario.innerText = 'Eliminando...';
+   eliminarCiudadano();
+
  }
