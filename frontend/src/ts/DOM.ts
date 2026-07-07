@@ -31,6 +31,8 @@ import { editarCiudadano, eliminarCiudadano, registrarCiudadano } from './Petici
  let botonesMapa: HTMLElement;
  let contenedorBusqueda: HTMLElement;
  let cancelar: HTMLElement;
+ let mensajeEliminar: HTMLElement;
+ let edicionVolver: HTMLElement;
 
  let ubicacionConfirmada: boolean;
  export function setUbicacionConfirmada(value: boolean) { ubicacionConfirmada = value; }
@@ -67,7 +69,9 @@ import { editarCiudadano, eliminarCiudadano, registrarCiudadano } from './Petici
   botonEnvio,
   botonesMapa,
   contenedorBusqueda,
-  cancelar
+  cancelar,
+  mensajeEliminar,
+  edicionVolver
 
  }
 
@@ -101,6 +105,8 @@ import { editarCiudadano, eliminarCiudadano, registrarCiudadano } from './Petici
     botonEliminar = (document.getElementById('botonEliminar') as HTMLElement);
     botonesMapa = (document.getElementById('botonesMapa') as HTMLElement);
     cancelar = (document.getElementById('cancelar') as HTMLElement);
+    mensajeEliminar = (document.getElementById('mensajeEliminar') as HTMLElement);
+    edicionVolver = (document.getElementById('edicionVolver') as HTMLElement);
 
     ubicacionConfirmada = false;
     confirmarEliminar = false;
@@ -201,6 +207,9 @@ export function navegacionNuevoRegistro() {
   botonEnviar.classList.add('visible');
   botonEnviar.classList.remove('invisible'); 
 
+  mensajeEliminar.classList.remove('visible');
+  mensajeEliminar.classList.add('invisible');
+
   botonEnviar.innerText = 'Enviar';
   botonEnviar.onclick = registrarCiudadano;
   cancelar.onclick = navegacionNuevoRegistro;
@@ -215,6 +224,8 @@ export function navegacionNuevoRegistro() {
  export function navegacionEdicion(ciudadanoEliminado?: boolean) {
 
    mensajeFormulario.innerText = '';
+   textoUbicacion.classList.remove('visible');
+   textoUbicacion.classList.remove('invisible');
    botonEliminar.innerText = 'Eliminar';
    botonEliminar.onclick = eliminarCiudadano;
    cancelar.onclick = navegacionEdicion;
@@ -227,7 +238,7 @@ export function navegacionNuevoRegistro() {
   toggle(botonesEdicion);
   toggle(botonEliminar);
   toggle(datosCiudadano);
-
+  
   if (ciudadanoEliminado === undefined) {
     botonEnviar.innerText = 'Enviar';
     botonEnviar.onclick = editarCiudadano;
@@ -272,6 +283,11 @@ export function navegacionNuevoRegistro() {
  }
 
  export function confirmarUbicacion() {
+  habilitar(botonEnviar);
+  habilitar(botonEliminar);
+  habilitar(botonVolver);
+  habilitar(edicionVolver);
+  habilitar(cancelar);
   toggle(ubicacionCorrecta);
   toggle(ubicacionIncorrecta);
   toggle(botonCapturarUbicacion);
@@ -282,9 +298,23 @@ export function navegacionNuevoRegistro() {
 
  export function confirmarEliminacion() {
 
+   
    setConfirmarEliminar(true);
+   toggle(mensajeEliminar);
    mensajeFormulario.innerText = 'Eliminando...';
    eliminarCiudadano();
+   eliminarTerminar();
+
+ }
+
+ export function eliminarTerminar() {
+
    setConfirmarEliminar(false);
+   habilitar(edicionVolver);
+   habilitar(botonCapturarUbicacion);
+   habilitar(botonEnviar);
+   toggle(mensajeEliminar);
+   botonEliminar.innerText = 'Eliminar';
+   cancelar.onclick = navegacionEdicion;
 
  }

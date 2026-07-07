@@ -39,7 +39,7 @@ main {
   
 }
 
-#mensajes, #textoUbicacion, #mensajeFormulario { 
+#mensajes, #textoUbicacion, #mensajeFormulario, #mensajeEliminar { 
 
   height: 20px;
   width: 300px; 
@@ -48,8 +48,9 @@ main {
   animation: pulso 2s ease-in-out infinite;
   text-align: center;
 
-
 }
+
+#mensajeEliminar { width: 350px; }
 
 @keyframes pulso {
   0%, 100% {

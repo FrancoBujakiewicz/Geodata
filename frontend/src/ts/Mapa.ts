@@ -27,6 +27,11 @@ export function capturarUbicacion(): void {
   }
 
   DOM.inhabilitar(DOM.botonCapturarUbicacion);
+  DOM.inhabilitar(DOM.botonEnviar);
+  DOM.inhabilitar(DOM.botonEliminar);
+  DOM.inhabilitar(DOM.cancelar);
+  DOM.inhabilitar(DOM.botonVolver);
+  DOM.inhabilitar(DOM.edicionVolver); 
 
   navigator.geolocation.getCurrentPosition(
     (pos) => {
