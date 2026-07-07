@@ -25,14 +25,19 @@ export function capturarUbicacion(): void {
     alert('La geolocalización no está disponible en este navegador.')
     return
   }
+
+  DOM.inhabilitar(DOM.botonCapturarUbicacion);
+
   navigator.geolocation.getCurrentPosition(
     (pos) => {
+      DOM.habilitar(DOM.botonCapturarUbicacion);
       ultimaLat = pos.coords.latitude
       ultimaLng = pos.coords.longitude
       inicializarMapa(ultimaLat, ultimaLng)
     },
     () => {
-       DOM.textoUbicacion.innerText = "No se pudo obtener la ubicación";
+      DOM.habilitar(DOM.botonCapturarUbicacion);
+      DOM.textoUbicacion.innerText = "No se pudo obtener la ubicación";
     },
     { enableHighAccuracy: true }
   )

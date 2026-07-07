@@ -166,6 +166,14 @@ import { editarCiudadano, eliminarCiudadano, registrarCiudadano } from './Petici
   e.classList.toggle('visible', !e.classList.toggle('invisible'));
  }
 
+ export function inhabilitar(boton: HTMLElement): void {
+  (boton as HTMLButtonElement).disabled = true;
+ }
+
+ export function habilitar(boton: HTMLElement): void {
+  (boton as HTMLButtonElement).disabled = false;
+ }
+
 function limpiarCampos(): void {
   dni.value = '';
   apellido.value = '';
@@ -186,6 +194,13 @@ export function navegacionNuevoRegistro() {
   toggle(botonVolver);
   toggle(datosCiudadano);
 
+  textoUbicacion.classList.add('visible');
+  textoUbicacion.classList.remove('invisible');  
+  botonesMapa.classList.add('visible');
+  botonesMapa.classList.remove('invisible');  
+  botonEnviar.classList.add('visible');
+  botonEnviar.classList.remove('invisible'); 
+
   botonEnviar.innerText = 'Enviar';
   botonEnviar.onclick = registrarCiudadano;
   cancelar.onclick = navegacionNuevoRegistro;
@@ -193,7 +208,7 @@ export function navegacionNuevoRegistro() {
   limpiarCampos();
   Mapa.resetMapa();
   dni.readOnly = false;
-  setConfirmarEliminar(true);
+  setConfirmarEliminar(false);
 
  }
 

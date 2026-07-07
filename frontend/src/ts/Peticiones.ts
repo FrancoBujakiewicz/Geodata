@@ -20,8 +20,11 @@ export function registrarCiudadano(): void {
     return;
   }
 
+  DOM.inhabilitar(DOM.botonEnviar);
+
   gas
     .withSuccessHandler((resp: any) => {
+      DOM.habilitar(DOM.botonEnviar);
       if (resp.exito) {
         DOM.mensajeFormulario.innerText = 'Registrado correctamente';
       } else {
@@ -34,6 +37,7 @@ export function registrarCiudadano(): void {
       }
     })
     .withFailureHandler(() => {
+      DOM.habilitar(DOM.botonEnviar);
       DOM.mensajeFormulario.innerText = 'Error de conexión';
     })
     .endpointRegistrar(datos);
@@ -53,8 +57,11 @@ export function buscarCiudadano(): void {
     return;
   }
 
+  DOM.inhabilitar(DOM.botonBuscar);
+
   gas
     .withSuccessHandler((resp: any) => {
+      DOM.habilitar(DOM.botonBuscar);
       DOM.mensajes.innerText = '';
       if (resp.exito) {
         const datos = resp.datos;
@@ -75,6 +82,7 @@ export function buscarCiudadano(): void {
       }
     })
     .withFailureHandler(() => {
+      DOM.habilitar(DOM.botonBuscar);
       DOM.mensajes.innerText = 'Error de conexión';
     })
     .endpointBuscar(dni);
@@ -101,8 +109,11 @@ export function eliminarCiudadano(): void {
     return;
   }
 
+  DOM.inhabilitar(DOM.botonEliminar);
+
   gas
     .withSuccessHandler((resp: any) => {
+      DOM.habilitar(DOM.botonEliminar);
       if (resp.exito) {
         DOM.mensajes.innerText = 'Eliminado correctamente';
         DOM.navegacionEdicion(true);
@@ -111,6 +122,7 @@ export function eliminarCiudadano(): void {
       }
     })
     .withFailureHandler(() => {
+      DOM.habilitar(DOM.botonEliminar);
       DOM.mensajes.innerText = 'Error de conexión';
     })
     .endpointEliminar(dni);
@@ -132,8 +144,11 @@ export function editarCiudadano(): void {
     return;
   }
 
+  DOM.inhabilitar(DOM.botonEnviar);
+
   gas
     .withSuccessHandler((resp: any) => {
+      DOM.habilitar(DOM.botonEnviar);
       if (resp.exito) {
         DOM.mensajeFormulario.innerText = 'Editado correctamente';
       } else {
@@ -146,6 +161,7 @@ export function editarCiudadano(): void {
       }
     })
     .withFailureHandler(() => {
+      DOM.habilitar(DOM.botonEnviar);
       DOM.mensajeFormulario.innerText = 'Error de conexión';
     })
     .endpointEditar(datos);
