@@ -267,8 +267,6 @@ export function navegacionNuevoRegistro() {
     botonEnviar.classList.add('visible');
     botonesMapa.classList.remove('invisible');
     botonesMapa.classList.add('visible');
-    textoUbicacion.classList.remove('invisible');
-    textoUbicacion.classList.add('visible');
 
     const inputs = datosCiudadano.querySelectorAll('input');
     inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });

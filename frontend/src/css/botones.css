@@ -79,7 +79,7 @@ background: linear-gradient(
 
 }
 
-#edicionVolver { width: 310px; }
+#edicionVolver, #botonVolver { width: 310px; }
 #botonEliminar, #cancelar, #seccionEnvio #boton { width: 215px; }
 
 #botonesEdicion, #botonesEdicion center { 
