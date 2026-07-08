@@ -302,6 +302,9 @@ export function navegacionNuevoRegistro() {
   textoUbicacion.innerText = 'Ubicación confirmada';
   mensajeFormulario.innerText = '';
   setUbicacionConfirmada(true);
+
+  const inputs = datosCiudadano.querySelectorAll('input');
+  inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
  }
 
  export function confirmarEliminacion() {

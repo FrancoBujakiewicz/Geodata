@@ -20,6 +20,9 @@ export function registrarCiudadano(): void {
     return;
   }
 
+  const inputs = DOM.datosCiudadano.querySelectorAll('input');
+  inputs.forEach((input: HTMLInputElement) => { input.readOnly = true; });
+
   DOM.inhabilitar(DOM.botonEnviar);
   DOM.inhabilitar(DOM.botonEliminar);
   DOM.inhabilitar(DOM.cancelar);
@@ -33,6 +36,7 @@ export function registrarCiudadano(): void {
       DOM.habilitar(DOM.cancelar);
       DOM.habilitar(DOM.botonVolver);
       DOM.habilitar(DOM.botonCapturarUbicacion);
+      inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
       if (resp.exito) {
         DOM.mensajeFormulario.innerText = 'Registrado correctamente';
       } else {
@@ -45,6 +49,7 @@ export function registrarCiudadano(): void {
       }
     })
     .withFailureHandler(() => {
+      inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
       DOM.habilitar(DOM.botonEnviar);
       DOM.habilitar(DOM.botonEliminar);
       DOM.habilitar(DOM.cancelar);
@@ -104,8 +109,14 @@ export function buscarCiudadano(): void {
 }
 
 export function eliminarCiudadano(): void {
+
   DOM.mensajeEliminar.innerText = 'Eliminar? Seguro?';
+
+  const inputs = DOM.datosCiudadano.querySelectorAll('input');
+
   if(!DOM.getConfirmarEliminar()) {
+    
+  inputs.forEach((input: HTMLInputElement) => { input.readOnly = true; });
     DOM.toggle(DOM.mensajeEliminar);
     DOM.inhabilitar(DOM.botonCapturarUbicacion);
     DOM.inhabilitar(DOM.edicionVolver);
@@ -130,6 +141,7 @@ export function eliminarCiudadano(): void {
     return;
   }
 
+  inputs.forEach((input: HTMLInputElement) => { input.readOnly = true; });
   DOM.inhabilitar(DOM.botonEliminar);
   DOM.inhabilitar(DOM.botonEnviar);
   DOM.inhabilitar(DOM.cancelar);
@@ -147,6 +159,7 @@ export function eliminarCiudadano(): void {
         DOM.habilitar(DOM.cancelar);
         DOM.habilitar(DOM.edicionVolver);
         DOM.habilitar(DOM.botonCapturarUbicacion);
+        inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
       } else {
         DOM.mensajes.innerText = String(resp.error);
       }
@@ -157,6 +170,7 @@ export function eliminarCiudadano(): void {
       DOM.habilitar(DOM.cancelar);
       DOM.habilitar(DOM.edicionVolver);
       DOM.habilitar(DOM.botonCapturarUbicacion);
+      inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
       DOM.mensajes.innerText = 'Error de conexión';
     })
     .endpointEliminar(dni);
@@ -164,6 +178,9 @@ export function eliminarCiudadano(): void {
 }
 
 export function editarCiudadano(): void {
+
+  const inputs = DOM.datosCiudadano.querySelectorAll('input');
+
   if(!DOM.getUbicacionConfirmada()) {
     DOM.mensajeFormulario.innerText = 'No se confirmó la ubicación';
     return;
@@ -179,6 +196,7 @@ export function editarCiudadano(): void {
     return;
   }
 
+  inputs.forEach((input: HTMLInputElement) => { input.readOnly = true; });
   DOM.inhabilitar(DOM.botonEnviar);
   DOM.inhabilitar(DOM.botonEliminar);
   DOM.inhabilitar(DOM.cancelar);
@@ -192,6 +210,7 @@ export function editarCiudadano(): void {
       DOM.habilitar(DOM.cancelar);
       DOM.habilitar(DOM.edicionVolver);
       DOM.habilitar(DOM.botonCapturarUbicacion);
+      inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
       if (resp.exito) {
         DOM.mensajeFormulario.innerText = 'Editado correctamente';
       } else {
@@ -209,6 +228,7 @@ export function editarCiudadano(): void {
       DOM.habilitar(DOM.cancelar);
       DOM.habilitar(DOM.edicionVolver);
       DOM.habilitar(DOM.botonCapturarUbicacion);
+      inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
       DOM.mensajeFormulario.innerText = 'Error de conexión';
     })
     .endpointEditar(datos);

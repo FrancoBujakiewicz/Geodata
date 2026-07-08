@@ -29,6 +29,9 @@ export function capturarUbicacion(): void {
     return
   }
 
+  const inputs = DOM.datosCiudadano.querySelectorAll('input');
+  inputs.forEach((input: HTMLInputElement) => { input.readOnly = true; });
+
   DOM.inhabilitar(DOM.botonCapturarUbicacion);
   DOM.inhabilitar(DOM.botonEnviar);
   DOM.inhabilitar(DOM.botonEliminar);
@@ -44,6 +47,7 @@ export function capturarUbicacion(): void {
       inicializarMapa(ultimaLat, ultimaLng)
     },
     (error) => {
+      inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
       DOM.habilitar(DOM.botonCapturarUbicacion);
       DOM.habilitar(DOM.botonEnviar);
       DOM.habilitar(DOM.botonEliminar);
