@@ -123,6 +123,7 @@ export function eliminarCiudadano(): void {
     DOM.inhabilitar(DOM.edicionVolver);
     DOM.inhabilitar(DOM.botonEnviar);
     DOM.botonEliminar.innerText = 'Confirmar';
+    DOM.botonEliminar.style.background = "linear-gradient(180deg, #3FC733 0%, #00B200 100%)";
     DOM.botonEliminar.onclick = DOM.confirmarEliminacion;
     DOM.cancelar.onclick = DOM.eliminarTerminar;
     return;

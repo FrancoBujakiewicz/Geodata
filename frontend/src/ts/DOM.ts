@@ -330,6 +330,7 @@ export function navegacionNuevoRegistro() {
     habilitar(cancelar);
     toggle(mensajeEliminar);
     botonEliminar.innerText = 'Eliminar';
+    botonEliminar.style.background = "linear-gradient(180deg, #C73333 0%, #B20000 100%)";
     botonEliminar.onclick = eliminarCiudadano;
     cancelar.onclick = navegacionEdicion;
 
