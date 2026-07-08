@@ -19,6 +19,9 @@ export let ultimaLng: number = 0
 
 export function capturarUbicacion(): void {
 
+  DOM.textoUbicacion.classList.add('visible');
+  DOM.textoUbicacion.classList.remove('invisible');
+
   DOM.textoUbicacion.innerText = "Capturando ubicación...";
 
   if (!navigator.geolocation) {
@@ -42,6 +45,11 @@ export function capturarUbicacion(): void {
     },
     () => {
       DOM.habilitar(DOM.botonCapturarUbicacion);
+      DOM.habilitar(DOM.botonEnviar);
+      DOM.habilitar(DOM.botonEliminar);
+      DOM.habilitar(DOM.cancelar);
+      DOM.habilitar(DOM.botonVolver);
+      DOM.habilitar(DOM.edicionVolver); 
       DOM.textoUbicacion.innerText = "No se pudo obtener la ubicación";
     },
     { enableHighAccuracy: true }

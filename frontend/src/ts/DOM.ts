@@ -310,14 +310,15 @@ export function navegacionNuevoRegistro() {
 
  }
 
- export function eliminarTerminar() {
+  export function eliminarTerminar() {
 
-   setConfirmarEliminar(false);
-   habilitar(edicionVolver);
-   habilitar(botonCapturarUbicacion);
-   habilitar(botonEnviar);
-   toggle(mensajeEliminar);
-   botonEliminar.innerText = 'Eliminar';
-   cancelar.onclick = navegacionEdicion;
+    setConfirmarEliminar(false);
+    habilitar(edicionVolver);
+    habilitar(botonCapturarUbicacion);
+    habilitar(botonEnviar);
+    toggle(mensajeEliminar);
+    botonEliminar.innerText = 'Eliminar';
+    botonEliminar.onclick = eliminarCiudadano;
+    cancelar.onclick = navegacionEdicion;
 
- }
+  }
