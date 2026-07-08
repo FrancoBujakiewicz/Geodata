@@ -34,7 +34,7 @@ export function capturarUbicacion(): void {
   DOM.inhabilitar(DOM.botonEliminar);
   DOM.inhabilitar(DOM.cancelar);
   DOM.inhabilitar(DOM.botonVolver);
-  DOM.inhabilitar(DOM.edicionVolver); 
+  DOM.inhabilitar(DOM.edicionVolver);
 
   navigator.geolocation.getCurrentPosition(
     (pos) => {
@@ -43,18 +43,23 @@ export function capturarUbicacion(): void {
       ultimaLng = pos.coords.longitude
       inicializarMapa(ultimaLat, ultimaLng)
     },
-    () => {
+    (error) => {
       DOM.habilitar(DOM.botonCapturarUbicacion);
       DOM.habilitar(DOM.botonEnviar);
       DOM.habilitar(DOM.botonEliminar);
       DOM.habilitar(DOM.cancelar);
       DOM.habilitar(DOM.botonVolver);
-      DOM.habilitar(DOM.edicionVolver); 
-      DOM.textoUbicacion.innerText = "No se pudo obtener la ubicación";
+      DOM.habilitar(DOM.edicionVolver);
+
+      if (error.code === error.PERMISSION_DENIED) {
+        DOM.textoUbicacion.innerText = "Habilite permiso de ubicación";
+      } else {
+        DOM.textoUbicacion.innerText = "No se pudo obtener la ubicación";
+      }
     },
     { enableHighAccuracy: true }
   )
- 
+
 }
 
 export function reintentar(): void {
