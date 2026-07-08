@@ -192,6 +192,9 @@ function limpiarCampos(): void {
 }
 
 export function navegacionNuevoRegistro() {
+
+  const inputs = datosCiudadano.querySelectorAll('input');
+  inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
   
   toggle(contenedorBusqueda);
   toggle(botonBuscar);
@@ -222,6 +225,9 @@ export function navegacionNuevoRegistro() {
  }
 
  export function navegacionEdicion(ciudadanoEliminado?: boolean) {
+
+  const inputs = datosCiudadano.querySelectorAll('input');
+  inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
 
    mensajeFormulario.innerText = '';
    textoUbicacion.classList.remove('visible');
@@ -296,7 +302,6 @@ export function navegacionNuevoRegistro() {
 
  export function confirmarEliminacion() {
 
-   
    setConfirmarEliminar(true);
    toggle(mensajeEliminar);
    mensajeFormulario.innerText = 'Eliminando...';
