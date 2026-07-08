@@ -73,7 +73,33 @@ export function reintentar(): void {
   DOM.ubicacionCorrecta.classList.remove('visible');
   DOM.ubicacionIncorrecta.classList.add('invisible');
   DOM.ubicacionIncorrecta.classList.remove('visible');
-  capturarUbicacion()
+  DOM.ubicacionCancelar.classList.add('invisible');
+  DOM.ubicacionCancelar.classList.remove('visible');
+  capturarUbicacion();
+}
+
+export function ubicacionCancelar(): void {
+  DOM.ubicacionCorrecta.classList.add('invisible');
+  DOM.ubicacionCorrecta.classList.remove('visible');
+  DOM.ubicacionIncorrecta.classList.add('invisible');
+  DOM.ubicacionIncorrecta.classList.remove('visible');
+  DOM.ubicacionCancelar.classList.add('invisible');
+  DOM.ubicacionCancelar.classList.remove('visible');
+
+  DOM.botonCapturarUbicacion.classList.add('visible');
+  DOM.botonCapturarUbicacion.classList.remove('invisible');
+
+  DOM.textoUbicacion.innerText = '';
+
+  DOM.habilitar(DOM.botonEliminar);
+  DOM.habilitar(DOM.botonEnviar);
+  DOM.habilitar(DOM.cancelar);
+  DOM.habilitar(DOM.botonVolver);
+  DOM.habilitar(DOM.edicionVolver);
+
+  const inputs = DOM.datosCiudadano.querySelectorAll('input');
+  inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
+
 }
 
 export function resetMapa(): void {
@@ -93,6 +119,8 @@ export function resetMapa(): void {
   DOM.ubicacionCorrecta.classList.add('invisible');
   DOM.ubicacionIncorrecta.classList.remove('visible');
   DOM.ubicacionIncorrecta.classList.add('invisible');
+  DOM.ubicacionCancelar.classList.remove('visible');
+  DOM.ubicacionCancelar.classList.add('invisible');
 
 }
 
@@ -125,6 +153,8 @@ function inicializarMapa(lat: number, lng: number): void {
     DOM.ubicacionCorrecta.classList.add('visible');
     DOM.ubicacionIncorrecta.classList.remove('invisible');
     DOM.ubicacionIncorrecta.classList.add('visible');
+    DOM.ubicacionCancelar.classList.remove('invisible');
+    DOM.ubicacionCancelar.classList.add('visible');
     DOM.textoUbicacion.innerText = "¿La ubicación es correcta?";
     return;
   }
@@ -142,6 +172,7 @@ function inicializarMapa(lat: number, lng: number): void {
   toggle(DOM.botonCapturarUbicacion);
   toggle(DOM.ubicacionCorrecta);
   toggle(DOM.ubicacionIncorrecta);
+  toggle(DOM.ubicacionCancelar);
   DOM.textoUbicacion.innerText = "¿La ubicación es correcta?";
 
 }

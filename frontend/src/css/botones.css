@@ -69,7 +69,7 @@ background: linear-gradient(
 
 }
 
-#ubicacionIncorrecta, #botonEliminar, #cancelar {
+#ubicacionIncorrecta, #botonEliminar, #ubicacionCancelar, #cancelar {
 
   background: linear-gradient(
     180deg,

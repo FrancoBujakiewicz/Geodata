@@ -33,6 +33,7 @@ import { editarCiudadano, eliminarCiudadano, registrarCiudadano } from './Petici
  let cancelar: HTMLElement;
  let mensajeEliminar: HTMLElement;
  let edicionVolver: HTMLElement;
+ let ubicacionCancelar: HTMLElement;
 
  let ubicacionConfirmada: boolean;
  export function setUbicacionConfirmada(value: boolean) { ubicacionConfirmada = value; }
@@ -71,7 +72,8 @@ import { editarCiudadano, eliminarCiudadano, registrarCiudadano } from './Petici
   contenedorBusqueda,
   cancelar,
   mensajeEliminar,
-  edicionVolver
+  edicionVolver,
+  ubicacionCancelar
 
  }
 
@@ -107,6 +109,7 @@ import { editarCiudadano, eliminarCiudadano, registrarCiudadano } from './Petici
     cancelar = (document.getElementById('cancelar') as HTMLElement);
     mensajeEliminar = (document.getElementById('mensajeEliminar') as HTMLElement);
     edicionVolver = (document.getElementById('edicionVolver') as HTMLElement);
+    ubicacionCancelar = (document.getElementById('ubicacionCancelar') as HTMLElement);
 
     ubicacionConfirmada = false;
     confirmarEliminar = false;
@@ -298,6 +301,7 @@ export function navegacionNuevoRegistro() {
   habilitar(cancelar);
   toggle(ubicacionCorrecta);
   toggle(ubicacionIncorrecta);
+  toggle(ubicacionCancelar);
   toggle(botonCapturarUbicacion);
   textoUbicacion.innerText = 'Ubicación confirmada';
   mensajeFormulario.innerText = '';
