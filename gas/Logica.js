@@ -90,11 +90,8 @@ function validarDatos(datosCiudadano) {
   }
 
   const validacionDni = validacionNumerica(datosCiudadano.dni);
-  if(String(datosCiudadano.dni).length < 8) {
-    errores.dni = 'DNI contiene 8 dígitos';
-  }
-  else if (!validacionDni.esValido) {
-    errores.dni = 'DNI solo puede contener números';
+  if(String(datosCiudadano.dni).length < 8 || !validacionDni.esValido || /^0+$/.test(datosCiudadano.dni)) {
+    errores.dni = 'DNI inválido';
   }
 
   const validacionNumWhatsapp = validacionNumerica(datosCiudadano.numWhatsapp);
