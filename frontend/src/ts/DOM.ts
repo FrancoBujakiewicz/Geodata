@@ -310,7 +310,6 @@ export function navegacionNuevoRegistro() {
    toggle(mensajeEliminar);
    mensajeFormulario.innerText = 'Eliminando...';
    eliminarCiudadano();
-   eliminarTerminar();
 
  }
 
@@ -320,6 +319,8 @@ export function navegacionNuevoRegistro() {
     habilitar(edicionVolver);
     habilitar(botonCapturarUbicacion);
     habilitar(botonEnviar);
+    habilitar(botonEliminar);
+    habilitar(cancelar);
     toggle(mensajeEliminar);
     botonEliminar.innerText = 'Eliminar';
     botonEliminar.onclick = eliminarCiudadano;

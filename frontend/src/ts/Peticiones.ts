@@ -142,6 +142,11 @@ export function eliminarCiudadano(): void {
       if (resp.exito) {
         DOM.mensajes.innerText = 'Eliminado correctamente';
         DOM.navegacionEdicion(true);
+        DOM.habilitar(DOM.botonEliminar);
+        DOM.habilitar(DOM.botonEnviar);
+        DOM.habilitar(DOM.cancelar);
+        DOM.habilitar(DOM.edicionVolver);
+        DOM.habilitar(DOM.botonCapturarUbicacion);
       } else {
         DOM.mensajes.innerText = String(resp.error);
       }
