@@ -111,6 +111,7 @@ export function buscarCiudadano(): void {
 export function eliminarCiudadano(): void {
 
   DOM.mensajeEliminar.innerText = 'Eliminar? Seguro?';
+  DOM.mensajeFormulario.innerText = '';
 
   const inputs = DOM.datosCiudadano.querySelectorAll('input');
 

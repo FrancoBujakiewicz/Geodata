@@ -24,6 +24,8 @@ export function capturarUbicacion(): void {
 
   DOM.textoUbicacion.innerText = "Capturando ubicación...";
 
+  DOM.mensajeFormulario.innerText = '';
+
   if (!navigator.geolocation) {
     alert('La geolocalización no está disponible en este navegador.')
     return
