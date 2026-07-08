@@ -104,6 +104,7 @@ export function buscarCiudadano(): void {
 }
 
 export function eliminarCiudadano(): void {
+  DOM.mensajeEliminar.innerText = 'Eliminar? Seguro?';
   if(!DOM.getConfirmarEliminar()) {
     DOM.toggle(DOM.mensajeEliminar);
     DOM.inhabilitar(DOM.botonCapturarUbicacion);
@@ -122,6 +123,7 @@ export function eliminarCiudadano(): void {
   }
 
   DOM.mensajes.innerText = 'Eliminando...';
+  DOM.mensajeEliminar.innerText = '';
 
   if (!gas) {
     DOM.mensajes.innerText = 'Error: GAS no disponible';
@@ -136,11 +138,7 @@ export function eliminarCiudadano(): void {
 
   gas
     .withSuccessHandler((resp: any) => {
-      DOM.habilitar(DOM.botonEliminar);
-      DOM.habilitar(DOM.botonEnviar);
-      DOM.habilitar(DOM.cancelar);
-      DOM.habilitar(DOM.edicionVolver);
-      DOM.habilitar(DOM.botonCapturarUbicacion);
+     
       if (resp.exito) {
         DOM.mensajes.innerText = 'Eliminado correctamente';
         DOM.navegacionEdicion(true);
@@ -157,6 +155,7 @@ export function eliminarCiudadano(): void {
       DOM.mensajes.innerText = 'Error de conexión';
     })
     .endpointEliminar(dni);
+
 }
 
 export function editarCiudadano(): void {

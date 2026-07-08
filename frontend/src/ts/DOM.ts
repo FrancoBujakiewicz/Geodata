@@ -230,6 +230,10 @@ export function navegacionNuevoRegistro() {
   inputs.forEach((input: HTMLInputElement) => { input.readOnly = false; });
 
    mensajeFormulario.innerText = '';
+
+   mensajeEliminar.classList.add('invisible');
+   mensajeEliminar.classList.remove('visible');
+
    textoUbicacion.classList.remove('visible');
    textoUbicacion.classList.add('invisible');
    botonEliminar.innerText = 'Eliminar';
